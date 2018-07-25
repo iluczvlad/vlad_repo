@@ -24,7 +24,10 @@ public class IngredientServiceImpl implements IngredientService {
         Optional<Ingredient> byId = ingredientRepository.findById(id);
         if (byId.isPresent()) {
             Ingredient ingredient = byId.get();
-            return new IngredientDTO(ingredient.getId(), ingredient.getName());
+            IngredientDTO dto = new IngredientDTO();
+            dto.setId(ingredient.getId());
+//            return new IngredientDTO(ingredient.getId(), ingredient.getName());
+            return dto;
         } else {
             return null;
         }
