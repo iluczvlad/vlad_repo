@@ -1,8 +1,10 @@
 package com.vlad.backend.model;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+@Entity
 public class User {
     @Id
     @GeneratedValue
@@ -11,12 +13,12 @@ public class User {
     private String password;
     private String name;
 
-    public Long getId() {
+    public Long getId_usr() {
         return id_usr;
     }
 
-    public void setId(Long id) {
-        this.id_usr = id;
+    public void setId_usr(Long id_usr) {
+        this.id_usr = id_usr;
     }
 
     public String getEmail() {

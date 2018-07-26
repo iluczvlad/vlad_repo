@@ -23,15 +23,17 @@ public class UserServiceImpl implements UserService {
     public UserDTO get(Long id_usr) {
         Optional<User> byId = UserRepository.findById(id_usr);
         if (byId.isPresent()) {
-            User ingredient = byId.get();
+            User user = byId.get();
             UserDTO dto = new UserDTO();
-            dto.setId_usr(ingredient.getId());
-//            return new UserDTO(User.getId(), User.getName());
+            dto.setId_usr(user.getId_usr());
+//            return new UserDTO(User.getId_usr(), User.getName());
             return dto;
         } else {
             return null;
         }
     }
+
+
 
     @Override
     public void delete(Long id_usr) {

@@ -26,6 +26,8 @@ public class IngredientController {
         return new ResponseEntity<>(ingredientService.get(id), HttpStatus.OK);
     }
 
+
+
 //    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 //    public ResponseEntity<IngredientDTO> delete(@PathVariable Long id) {
 //        ingredientService.delete(id);

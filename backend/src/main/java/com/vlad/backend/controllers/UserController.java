@@ -20,7 +20,7 @@ public class UserController {
     public UserController(UserService userService) {this.userService = userService;}
 
     @RequestMapping(value = "/{id_usr}", method = RequestMethod.GET)
-    public ResponseEntity<UserDTO> get(PathVariable Long id_usr) {
+    public ResponseEntity<UserDTO> get(@PathVariable Long id_usr) {
         return new ResponseEntity<>(userService.get(id_usr), HttpStatus.OK);
     }
 }
