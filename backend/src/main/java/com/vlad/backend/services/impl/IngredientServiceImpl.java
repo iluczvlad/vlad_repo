@@ -26,6 +26,7 @@ public class IngredientServiceImpl implements IngredientService {
             Ingredient ingredient = byId.get();
             IngredientDTO dto = new IngredientDTO();
             dto.setId(ingredient.getId());
+
 //            return new IngredientDTO(ingredient.getId(), ingredient.getName());
             return dto;
         } else {

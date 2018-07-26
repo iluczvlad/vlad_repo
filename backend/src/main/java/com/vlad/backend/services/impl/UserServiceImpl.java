@@ -25,8 +25,12 @@ public class UserServiceImpl implements UserService {
         if (byId.isPresent()) {
             User user = byId.get();
             UserDTO dto = new UserDTO();
-            dto.setId_usr(user.getId_usr());
-//            return new UserDTO(User.getId_usr(), User.getName());
+            dto.setId(user.getId());
+            dto.setEmail(user.getEmail());
+            dto.setName(user.getName());
+            dto.setPassword(user.getPassword());
+
+//            return new UserDTO(User.getId(), User.getName());
             return dto;
         } else {
             return null;
