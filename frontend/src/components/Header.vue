@@ -4,31 +4,35 @@
             LOGO
         </div>
         <div>
-            <button v-if="!isLoggedIn" @click="login">Log In</button>
-            <button v-if="!isLoggedIn">Sign Up</button>
-            <button v-if="isLoggedIn" @click="logout">Log Out</button>
+            <sh-button :text="'Log In'" :disabled="false" v-if="!isLoggedIn" @click="login"/>
+            <sh-button v-if="!isLoggedIn">Sign Up</sh-button>
+            <sh-button v-if="isLoggedIn" @click="logout">Log Out</sh-button>
         </div>
     </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+import ShButton from '@/components/ShButton.vue'
+export default Vue.extend({
   name: 'header',
-  data: function () {
+  components: {
+      ShButton
+  },
+  data() {
       return {
-          isLoggedIn: false,
-      }
+          isLoggedIn: false
+      };
   },
   methods: {
-      login: function () {
+      login() {
           this.isLoggedIn = true;
       },
-      logout: function () {
+      logout() {
           this.isLoggedIn = false;
       }
-      
   }
-};
+});
 </script>
 
 <style lang="less" scoped>

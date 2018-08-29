@@ -5,16 +5,18 @@
   </div>
 </template>
 
-<script>
-import Header from "@/components/Header.vue";
-import AppContent from "@/components/AppContent.vue";
+<script lang="ts">
+import Vue from 'vue';
+import Header from '@/components/Header.vue';
+import AppContent from '@/components/AppContent.vue';
 
-export default {
+export default Vue.extend({
+  name: 'App',
   components: {
     Header,
     AppContent,
   }
-}
+});
 </script>
 
 <style lang="less">

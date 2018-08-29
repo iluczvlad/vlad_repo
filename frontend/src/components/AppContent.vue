@@ -1,26 +1,32 @@
 <template>
     <div id="app-content">
         <img src="@/assets/sh.jpg" class="cherry">
-        <input v-model="message">
+        <sh-input :placeholder="message"/>
         <label>{{message}}</label>
         <button @click="changeMessage">Change message</button>
     </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue';
+import ShInput from './ShInput.vue';
+
+export default Vue.extend({
   name: 'app-content',
-  data: function () {
+  components: {
+      ShInput
+  },
+  data() {
     return {
-        message: '',
-    }
+        message: 'ytyvyvyf',
+    };
   },
   methods: {
-      changeMessage: function () {
+      changeMessage() {
           this.message = 'qwerty';
       }
   }
-};
+});
 </script>
 
 <style lang="less" scoped>
