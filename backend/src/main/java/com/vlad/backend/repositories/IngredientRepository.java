@@ -1,8 +1,7 @@
 package com.vlad.backend.repositories;
 
 import com.vlad.backend.model.Ingredient;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IngredientRepository extends CrudRepository<Ingredient, Long> {
+public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
 }

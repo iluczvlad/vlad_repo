@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/ingredient")
+@RequestMapping("/api/ingredient")
 public class IngredientController {
 
     private final IngredientService ingredientService;
@@ -26,7 +28,12 @@ public class IngredientController {
         return new ResponseEntity<>(ingredientService.get(id), HttpStatus.OK);
     }
 
+    @RequestMapping("/list")
+    public ResponseEntity<List<IngredientDTO>> findAll(){
+        return new ResponseEntity<>(ingredientService.findAll(), HttpStatus.OK);
+    }
 
+    //new endpoint "/random"^ in loc de findAll ne da lista ingrediente random
 
 //    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 //    public ResponseEntity<IngredientDTO> delete(@PathVariable Long id) {
