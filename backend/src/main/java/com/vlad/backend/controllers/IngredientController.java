@@ -33,11 +33,4 @@ public class IngredientController {
         return new ResponseEntity<>(ingredientService.findAll(), HttpStatus.OK);
     }
 
-    //new endpoint "/random"^ in loc de findAll ne da lista ingrediente random
-
-//    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-//    public ResponseEntity<IngredientDTO> delete(@PathVariable Long id) {
-//        ingredientService.delete(id);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 }

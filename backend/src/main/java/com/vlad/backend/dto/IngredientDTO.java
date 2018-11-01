@@ -4,27 +4,18 @@ public class IngredientDTO {
     private Long id;
     private String name;
     private Long kcal;
-    private String detox;
+    private Boolean detox;
     private String temp;
-    private String taste;
-    private String unit;
-    private String vegan;
+    private Boolean vegan;
+    private Boolean hasLactose;
+    private String portion;
 
     public IngredientDTO() {
     }
 
-    public IngredientDTO(Long id, String name, Long kcal, String detox, String temp, String taste, String unit, String vegan ) {
-        this.id = id;
-        this.name = name;
-        this.kcal = kcal;
-        this.detox = detox;
-        this.temp = temp;
-        this.taste = taste;
-        this.unit = unit;
-        this.vegan = vegan;
+    public Long getId() {
+        return id;
     }
-
-    public Long getId() { return id; }
 
     public void setId(Long id) {
         this.id = id;
@@ -46,23 +37,43 @@ public class IngredientDTO {
         this.kcal = kcal;
     }
 
-    public String getDetox() { return detox; }
+    public Boolean getDetox() {
+        return detox;
+    }
 
-    public void setDetox(String detox) { this.detox = detox; }
+    public void setDetox(Boolean detox) {
+        this.detox = detox;
+    }
 
-    public String getTemp() { return temp; }
+    public String getTemp() {
+        return temp;
+    }
 
-    public void setTemp(String temp) { this.temp = temp; }
+    public void setTemp(String temp) {
+        this.temp = temp;
+    }
 
-    public String getTaste() { return taste; }
+    public Boolean getVegan() {
+        return vegan;
+    }
 
-    public void setTaste(String taste) { this.taste = taste; }
+    public void setVegan(Boolean vegan) {
+        this.vegan = vegan;
+    }
 
-    public String getUnit() { return unit; }
+    public Boolean getHasLactose() {
+        return hasLactose;
+    }
 
-    public void setUnit(String unit) { this.unit = unit; }
+    public void setHasLactose(Boolean hasLactose) {
+        this.hasLactose = hasLactose;
+    }
 
-    public String getVegan() { return vegan; }
+    public String getPortion() {
+        return portion;
+    }
 
-    public void setVegan(String vegan) { this.vegan = vegan; }
+    public void setPortion(String portion) {
+        this.portion = portion;
+    }
 }

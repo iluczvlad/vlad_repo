@@ -1,8 +1,6 @@
 package com.vlad.backend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Ingredient {
@@ -11,11 +9,14 @@ public class Ingredient {
     private Long id;
     private String name;
     private Long kcal;
-    private String detox;
-    private String temp;
-    private String taste;
-    private String unit;
-    private String vegan;
+    private Boolean detox;
+
+    @Enumerated(EnumType.STRING)
+    private Temperature temp;
+    private Boolean vegan;
+    private Boolean hasLactose;
+    private String portion;
+    private Boolean sweetener;
 
     public Long getId() {
         return id;
@@ -41,43 +42,51 @@ public class Ingredient {
         this.kcal = kcal;
     }
 
-    public String getDetox() {
+    public Boolean getDetox() {
         return detox;
     }
 
-    public void setDetox(String detox) {
+    public void setDetox(Boolean detox) {
         this.detox = detox;
     }
 
-    public String getTemp() {
+    public Temperature getTemp() {
         return temp;
     }
 
-    public void setTemp(String temp) {
+    public void setTemp(Temperature temp) {
         this.temp = temp;
     }
 
-    public String getTaste() {
-        return taste;
-    }
-
-    public void setTaste(String taste) {
-        this.taste = taste;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getVegan() {
+    public Boolean getVegan() {
         return vegan;
     }
 
-    public void setVegan(String vegan) {
+    public void setVegan(Boolean vegan) {
         this.vegan = vegan;
+    }
+
+    public Boolean getHasLactose() {
+        return hasLactose;
+    }
+
+    public void setHasLactose(Boolean hasLactose) {
+        this.hasLactose = hasLactose;
+    }
+
+    public String getPortion() {
+        return portion;
+    }
+
+    public void setPortion(String portion) {
+        this.portion = portion;
+    }
+
+    public Boolean getSweetener() {
+        return sweetener;
+    }
+
+    public void setSweetener(Boolean sweetener) {
+        this.sweetener = sweetener;
     }
 }

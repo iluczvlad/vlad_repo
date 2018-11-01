@@ -26,15 +26,7 @@ public class IngredientServiceImpl implements IngredientService {
         Optional<Ingredient> byId = ingredientRepository.findById(id);
         if (byId.isPresent()) {
             Ingredient ingredient = byId.get();
-            IngredientDTO dto = new IngredientDTO();
-            dto.setId(ingredient.getId());
-            dto.setDetox(ingredient.getDetox());
-            dto.setKcal(ingredient.getKcal());
-            dto.setName(ingredient.getName());
-            dto.setTaste(ingredient.getTaste());
-
-//            return new IngredientDTO(ingredient.getId(), ingredient.getName());
-            return dto;
+            return toDto(ingredient);
         } else {
             return null;
         }
@@ -45,13 +37,7 @@ public class IngredientServiceImpl implements IngredientService {
         List<Ingredient> ingredients = ingredientRepository.findAll();
         List<IngredientDTO> dtos = new ArrayList<>();
         for (Ingredient ingredient : ingredients) {
-            IngredientDTO dto = new IngredientDTO();
-            dto.setId(ingredient.getId());
-            dto.setDetox(ingredient.getDetox());
-            dto.setKcal(ingredient.getKcal());
-            dto.setName(ingredient.getName());
-            dto.setTaste(ingredient.getTaste());
-            dtos.add(dto);
+            dtos.add(toDto(ingredient));
         }
         return dtos;
     }
@@ -59,5 +45,19 @@ public class IngredientServiceImpl implements IngredientService {
     @Override
     public void delete(Long id) {
         ingredientRepository.findById(id).ifPresent(ingredientRepository::delete);
+    }
+
+    @Override
+    public IngredientDTO toDto(Ingredient ingredient) {
+        IngredientDTO dto = new IngredientDTO();
+        dto.setId(ingredient.getId());
+        dto.setDetox(ingredient.getDetox());
+        dto.setKcal(ingredient.getKcal());
+        dto.setName(ingredient.getName());
+        dto.setHasLactose(ingredient.getHasLactose());
+        dto.setPortion(ingredient.getPortion());
+        dto.setTemp(ingredient.getTemp().name());
+        dto.setVegan(ingredient.getVegan());
+        return dto;
     }
 }

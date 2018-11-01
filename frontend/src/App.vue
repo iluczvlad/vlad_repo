@@ -1,17 +1,18 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <MyDemo/>
+    <SimpleShake/>
   </div>
 </template>
 
 <script>
-import MyDemo from './components/MyDemo.vue'
+
+import SimpleShake from '@/components/SimpleShake.vue'
 
 export default {
   name: 'app',
   components: {
-    MyDemo
+    SimpleShake
   }
 }
 </script>
