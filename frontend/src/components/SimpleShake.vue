@@ -1,15 +1,15 @@
 <template>
-    <div>
+    <div class="simple-shake">
         <md-button class="md-raised" @click="makeSimpleShake">Make a Shake</md-button>
-        <md-table>
+        <md-table class="simple-shake__table">
             <md-table-row>
-                <md-table-head>name</md-table-head>
-                <md-table-head>kcal</md-table-head>
-                <md-table-head>portion</md-table-head>
+                <md-table-head>Name</md-table-head>
+                <md-table-head>Kcal</md-table-head>
+                <md-table-head>Portion</md-table-head>
             </md-table-row>
 
-            <md-table-row v-for="(ing, index) in simpleShakeArr" :key="ing.id + index">
-                <md-table-cell>{{ing.name}}</md-table-cell>
+            <md-table-row v-for="ing in simpleShakeArr" :key="ing.id">
+                <md-table-cell class="table__name">{{ing.name}}</md-table-cell>
                 <md-table-cell>{{ing.kcal}}</md-table-cell>
                 <md-table-cell>{{ing.portion}}</md-table-cell>
             </md-table-row>
@@ -43,5 +43,16 @@ export default {
 </script>
 
 <style scoped>
-
+.simple-shake {
+    display: flex;  
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.simple-shake__table {
+    width: 75%;
+}
+.table__name {
+    text-transform: capitalize;
+}
 </style>
