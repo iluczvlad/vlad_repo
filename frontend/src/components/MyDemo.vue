@@ -6,7 +6,6 @@
         <md-table-head>detox</md-table-head>
         <md-table-head>kcal</md-table-head>
         <md-table-head>name</md-table-head>
-        <md-table-head>taste</md-table-head>
       </md-table-row>
 
       <md-table-row v-for="ingredient in ingredients" :key="ingredient.id">
@@ -14,7 +13,6 @@
         <md-table-cell>{{ingredient.detox}}</md-table-cell>
         <md-table-cell>{{ingredient.kcal}}</md-table-cell>
         <md-table-cell>{{ingredient.name}}</md-table-cell>
-        <md-table-cell>{{ingredient.taste}}</md-table-cell>
       </md-table-row>
     </md-table>
   </div>

@@ -14,6 +14,9 @@
                 <md-table-cell>{{ing.portion}}</md-table-cell>
             </md-table-row>
     </md-table>
+    <div>
+        Total kcal {{totalKcal}}
+    </div>
     </div>
 </template>
 
@@ -35,8 +38,11 @@ export default {
         }
     },
     computed: {
-        simpleShakeArr(){
+        simpleShakeArr() {
             return Object.entries(this.simpleShake).map(arr => arr[1])
+        },
+        totalKcal() {
+            return this.simpleShakeArr.map(it => it.kcal).reduce((acc, it) => acc + it, 0)
         }
     }
 }
@@ -48,6 +54,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 100%
 }
 .simple-shake__table {
     width: 75%;

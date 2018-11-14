@@ -1,18 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <SimpleShake/>
+    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
+    <Header/>
+    <div class="app__spacer">
+    </div>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-
-import SimpleShake from '@/components/SimpleShake.vue'
+import Header from "@/components/Header.vue"
 
 export default {
   name: 'app',
   components: {
-    SimpleShake
+    Header,
   }
 }
 </script>
@@ -22,8 +24,11 @@ export default {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+.app__spacer {
+  height: 20px;
 }
 </style>
