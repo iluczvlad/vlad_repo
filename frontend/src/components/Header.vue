@@ -4,16 +4,33 @@
         <router-link to="/"><md-icon>menu</md-icon></router-link>
             
         <div class="log-buttons">
-            <md-button class="md-raised md-primary">Login</md-button>
-            <md-button class="md-raised md-accent" @click="$router.push('register')">Sign Up</md-button>
-            <md-button class="md-raised md-accent">Sign Out</md-button>
+            <md-button class="md-raised md-primary" @click="$router.push('login')" v-if="!userLoggedIn">
+                Login
+            </md-button>
+            <md-button class="md-raised md-accent" @click="$router.push('register')"  v-if="!userLoggedIn">
+                Sign Up
+            </md-button>
+            <md-button class="md-raised md-accent" @click="logout" v-if="userLoggedIn">
+                Sign Out
+            </md-button>
         </div>
     </div>
 </template>
 
 <script>
-export default {
+import * as storage from '@/service/storage'
 
+export default {
+    methods: {
+        logout(){
+            storage.logout()
+        }
+    },
+    computed: {
+        userLoggedIn(){
+            return storage.isLoggedIn()
+        }
+    }
 }
 </script>
 
