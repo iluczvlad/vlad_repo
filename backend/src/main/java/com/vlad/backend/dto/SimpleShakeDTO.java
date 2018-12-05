@@ -1,10 +1,10 @@
 package com.vlad.backend.dto;
 
 public class SimpleShakeDTO {
-    private IngredientDTO liquid;
-    private IngredientDTO sweetener;
-    private IngredientDTO solid1;
-    private IngredientDTO solid2;
+    protected IngredientDTO liquid;
+    protected IngredientDTO sweetener;
+    protected IngredientDTO solid1;
+    protected IngredientDTO solid2;
 
     public IngredientDTO getLiquid() {
         return liquid;

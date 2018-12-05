@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/shake")
+@RequestMapping("/api")
 public class ShakeController {
     private final ShakeService shakeService;
 
@@ -19,7 +19,7 @@ public class ShakeController {
         this.shakeService = shakeService;
     }
 
-    @RequestMapping(value = "/simple", method = RequestMethod.GET)
+    @RequestMapping(value = "/nl/shake/simple", method = RequestMethod.GET)
     public ResponseEntity<SimpleShakeDTO> simple() {
         return new ResponseEntity<>(shakeService.generateSimpleShake(), HttpStatus.OK);
     }

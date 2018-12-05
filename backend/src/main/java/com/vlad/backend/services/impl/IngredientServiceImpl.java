@@ -56,8 +56,10 @@ public class IngredientServiceImpl implements IngredientService {
         dto.setName(ingredient.getName());
         dto.setHasLactose(ingredient.getHasLactose());
         dto.setPortion(ingredient.getPortion());
-        dto.setTemp(ingredient.getTemp().name());
+        dto.setTemp(ingredient.getTemp());
         dto.setVegan(ingredient.getVegan());
+        dto.setType(ingredient.getType());
+        dto.setSweetener(ingredient.getSweetener());
         return dto;
     }
 }

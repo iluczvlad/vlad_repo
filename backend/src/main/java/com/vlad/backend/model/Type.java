@@ -1,4 +1,7 @@
 package com.vlad.backend.model;
 
-public enum TYPE {
+public enum Type {
+    SOLID,
+    LIQUID,
+    SPICE
 }

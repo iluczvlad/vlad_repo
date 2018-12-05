@@ -5,6 +5,7 @@ import com.vlad.backend.model.User;
 import com.vlad.backend.repositories.UserRepository;
 import com.vlad.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,16 +13,18 @@ import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final UserRepository UserRepository;
+    private final UserRepository userRepository;
+    public final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(final UserRepository userRepository) {
-        this.UserRepository = userRepository;
+    public UserServiceImpl(final UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public UserDTO get(Long id_usr) {
-        Optional<User> byId = UserRepository.findById(id_usr);
+        Optional<User> byId = userRepository.findById(id_usr);
         if (byId.isPresent()) {
             User user = byId.get();
             UserDTO dto = new UserDTO();
@@ -37,10 +40,12 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
-
     @Override
-    public void delete(Long id_usr) {
-        UserRepository.findById(id_usr).ifPresent(UserRepository::delete);
+    public void save(UserDTO dto) {
+        User user = new User();
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        userRepository.save(user);
     }
 }

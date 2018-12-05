@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/ingredient")
+@RequestMapping("/api")
 public class IngredientController {
 
     private final IngredientService ingredientService;
@@ -23,12 +23,12 @@ public class IngredientController {
         this.ingredientService = ingredientService;
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/li/ingredient/{id}", method = RequestMethod.GET)
     public ResponseEntity<IngredientDTO> get(@PathVariable Long id) {
         return new ResponseEntity<>(ingredientService.get(id), HttpStatus.OK);
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/li/ingredient/list")
     public ResponseEntity<List<IngredientDTO>> findAll(){
         return new ResponseEntity<>(ingredientService.findAll(), HttpStatus.OK);
     }

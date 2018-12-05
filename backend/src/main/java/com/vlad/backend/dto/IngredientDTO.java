@@ -1,14 +1,19 @@
 package com.vlad.backend.dto;
 
+import com.vlad.backend.model.Temperature;
+import com.vlad.backend.model.Type;
+
 public class IngredientDTO {
     private Long id;
     private String name;
     private Long kcal;
     private Boolean detox;
-    private String temp;
     private Boolean vegan;
     private Boolean hasLactose;
     private String portion;
+    private Temperature temp;
+    private Type type;
+    private Boolean Sweetener;
 
     public IngredientDTO() {
     }
@@ -45,14 +50,6 @@ public class IngredientDTO {
         this.detox = detox;
     }
 
-    public String getTemp() {
-        return temp;
-    }
-
-    public void setTemp(String temp) {
-        this.temp = temp;
-    }
-
     public Boolean getVegan() {
         return vegan;
     }
@@ -75,5 +72,29 @@ public class IngredientDTO {
 
     public void setPortion(String portion) {
         this.portion = portion;
+    }
+
+    public Temperature getTemp() {
+        return temp;
+    }
+
+    public void setTemp(Temperature temp) {
+        this.temp = temp;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Boolean getSweetener() {
+        return Sweetener;
+    }
+
+    public void setSweetener(Boolean sweetener) {
+        Sweetener = sweetener;
     }
 }

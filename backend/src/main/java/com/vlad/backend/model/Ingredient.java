@@ -18,6 +18,9 @@ public class Ingredient {
     private String portion;
     private Boolean sweetener;
 
+    @Enumerated(EnumType.STRING)
+    private Type type;
+
     public Long getId() {
         return id;
     }
@@ -28,6 +31,14 @@ public class Ingredient {
 
     public String getName() {
         return name;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
     }
 
     public void setName(String name) {
