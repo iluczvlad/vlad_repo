@@ -21,14 +21,26 @@
 import * as storage from '@/service/storage'
 
 export default {
+    data() {
+        return {
+            userLoggedIn: storage.isLoggedIn()
+        }
+    },
     methods: {
-        logout(){
+        logout() {
             storage.logout()
+            this.userLoggedIn = false
         }
     },
     computed: {
-        userLoggedIn(){
-            return storage.isLoggedIn()
+        // userLoggedIn() {
+        //     console.log('loggedIn: ' + storage.isLoggedIn())
+        //     return storage.isLoggedIn()
+        // }
+    },
+    watch: {
+        $route() {
+            this.userLoggedIn = storage.isLoggedIn()
         }
     }
 }

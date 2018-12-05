@@ -112,8 +112,8 @@ export default {
       },
       validateUser () {
         this.$v.$touch()
-
         if (!this.$v.$invalid) {
+          debugger
           this.saveUser()
         }
       }

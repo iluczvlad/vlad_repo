@@ -9,9 +9,9 @@ var myInit = {
 };
 
 export function getIngredient(id) {
-    return fetch(new Request(`/api/ingredient/${id}`), myInit).then((response) => response.json());
+    return fetch(new Request(`/api/li/ingredient/${id}`), myInit).then((response) => response.json());
 }
 
 export function getAllIngredients(){
-    return fetch(new Request('/api/ingredient/list'), myInit).then((response) => response.json());
+    return fetch(new Request('/api/li/ingredient/list'), myInit).then((response) => response.json());
 }

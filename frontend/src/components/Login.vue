@@ -43,26 +43,20 @@ email,
 minLength,
 } from 'vuelidate/lib/validators'
 import * as storage from '@/service/storage'
-
+import {loginUser} from '@/api/user'
 export default {
     name: 'register',
     mixins: [validationMixin],
     data: () => ({
       form: {
-        name: null,
         password: null,
         email: null,
       },
     }),
     validations: {
       form: {
-        name: {
-          required,
-          minLength: minLength(3)
-        },
         password: {
           required,
-          minLength: minLength(6)
         },
         email: {
           required,
@@ -82,18 +76,22 @@ export default {
       },
       clearForm () {
         this.$v.$reset()
-        this.form.name = null
         this.form.password = null
         this.form.email = null
       },
       loginUser () {
-        storage.login(this.form.email, this.form.password)
-        this.$router.push('')
+        loginUser(this.form.email, this.form.password).then((ok) => {
+          if (ok) {
+            storage.login(this.form.email, this.form.password)
+            this.$router.push('/')
+          } else{
+            console.log('invalid credentials')
+          }
+        })
       },
       validateUser () {
         this.$v.$touch()
-
-        if (this.$v.$invalid) {
+        if (!this.$v.$invalid) {
           this.loginUser()
         }
       }
