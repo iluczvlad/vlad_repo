@@ -2,6 +2,7 @@ package com.vlad.backend.services.impl;
 
 import com.vlad.backend.dto.ComplexShakeDTO;
 import com.vlad.backend.dto.IngredientDTO;
+import com.vlad.backend.dto.RecipeDTO;
 import com.vlad.backend.dto.SimpleShakeDTO;
 import com.vlad.backend.model.Ingredient;
 import com.vlad.backend.model.Temperature;
@@ -56,7 +57,7 @@ public class ShakeServiceImpl implements ShakeService {
     }
 
     @Override
-    public ComplexShakeDTO generateComplexShake(){
+    public ComplexShakeDTO generateComplexShake(RecipeDTO dto){
         return new ComplexShakeDTO();
     }
 }

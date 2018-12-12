@@ -6,6 +6,10 @@ export function login(email, password) {
     window.localStorage.setItem(emailKey, email)
 }
 
+export function getAuth(){
+    return window.localStorage.getItem(authorizationKey)
+}
+
 export function logout(){
     window.localStorage.removeItem(authorizationKey)
     window.localStorage.removeItem(emailKey)

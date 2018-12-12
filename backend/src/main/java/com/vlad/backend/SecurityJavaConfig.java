@@ -33,12 +33,12 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
-                .authorizeRequests()
-                .anyRequest().authenticated()
-//                .antMatchers("/api/li/**").authenticated()
-//                .antMatchers("/api/nl/**").permitAll()
-                .and()
                 .httpBasic()
+                .authenticationEntryPoint(myAuthEntryPoint)
+                .and()
+                .authorizeRequests()
+                .antMatchers("/api/li/**").authenticated()
+                .antMatchers("/api/nl/**").permitAll()
                 .and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 //                .and()

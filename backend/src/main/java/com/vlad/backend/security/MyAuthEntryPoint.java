@@ -6,15 +6,18 @@ import org.springframework.stereotype.Component;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.io.PrintWriter;
 
 @Component
 public class MyAuthEntryPoint extends BasicAuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,
-                         AuthenticationException authException) {
-        response.addHeader("WWW-Authenticate", "Basic realm=" + getRealmName());
+                         AuthenticationException authException) throws IOException {
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        PrintWriter writer = response.getWriter();
+        writer.println("HTTP Status 401 - " + authException.getMessage());
     }
 
     @Override

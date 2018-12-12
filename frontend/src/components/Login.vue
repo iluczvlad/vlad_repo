@@ -18,7 +18,7 @@
                 </md-field>
                 <md-field :class="getValidationClass('password')">
                     <label for="password">Password</label>
-                    <md-input name="password" type="password" id="password" autocomplete="family-name" v-model="form.password" />
+                    <md-input name="password" id="password" autocomplete="family-name" v-model="form.password" />
                     <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
                     <span class="md-error" v-else-if="!$v.form.password.minlength">Invalid password</span>
                 </md-field>
@@ -85,6 +85,7 @@ export default {
             storage.login(this.form.email, this.form.password)
             this.$router.push('/')
           } else{
+            // TODO display smth
             console.log('invalid credentials')
           }
         })

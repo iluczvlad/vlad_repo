@@ -17,7 +17,7 @@ public class BackendApplication {
 
 	private static void init(ConfigurableApplicationContext context){
 		UserRepository userRepository = context.getBean(UserRepository.class);
-		User admin = userRepository.findByEmail("admin");
+		User admin = userRepository.findByEmail("admin@admin.admin");
 		if (admin == null){
 			User user = new User();
 			user.setEmail("admin@admin.admin");

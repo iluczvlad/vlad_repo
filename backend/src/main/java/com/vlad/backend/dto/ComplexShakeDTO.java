@@ -1,13 +1,25 @@
 package com.vlad.backend.dto;
 
-public class ComplexShakeDTO extends SimpleShakeDTO {
-    private IngredientDTO solid3;
+import java.util.ArrayList;
+import java.util.List;
 
-    public IngredientDTO getSolid3() {
-        return solid3;
+public class ComplexShakeDTO {
+    private List<IngredientDTO> liquids = new ArrayList<>();
+    private List<IngredientDTO> solids = new ArrayList<>();
+
+    public List<IngredientDTO> getLiquids() {
+        return liquids;
     }
 
-    public void setSolid3(IngredientDTO solid3) {
-        this.solid3 = solid3;
+    public void setLiquids(List<IngredientDTO> liquids) {
+        this.liquids = liquids;
+    }
+
+    public List<IngredientDTO> getSolids() {
+        return solids;
+    }
+
+    public void setSolids(List<IngredientDTO> solids) {
+        this.solids = solids;
     }
 }
