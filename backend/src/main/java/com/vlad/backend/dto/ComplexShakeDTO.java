@@ -6,6 +6,7 @@ import java.util.List;
 public class ComplexShakeDTO {
     private List<IngredientDTO> liquids = new ArrayList<>();
     private List<IngredientDTO> solids = new ArrayList<>();
+    private List<IngredientDTO> spices = new ArrayList<>();
 
     public List<IngredientDTO> getLiquids() {
         return liquids;
@@ -21,5 +22,13 @@ public class ComplexShakeDTO {
 
     public void setSolids(List<IngredientDTO> solids) {
         this.solids = solids;
+    }
+
+    public List<IngredientDTO> getSpices() {
+        return spices;
+    }
+
+    public void setSpices(List<IngredientDTO> spices) {
+        this.spices = spices;
     }
 }

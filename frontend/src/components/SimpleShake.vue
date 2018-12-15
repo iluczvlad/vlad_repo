@@ -1,33 +1,22 @@
 <template>
     <div class="simple-shake">
         <md-button class="md-raised" @click="makeSimpleShake">Make a Shake</md-button>
-        <md-table class="simple-shake__table">
-            <md-table-row>
-                <md-table-head>Name</md-table-head>
-                <md-table-head>Kcal</md-table-head>
-                <md-table-head>Portion</md-table-head>
-            </md-table-row>
-
-            <md-table-row v-for="ing in simpleShakeArr" :key="ing.id">
-                <md-table-cell class="table__name">{{ing.name}}</md-table-cell>
-                <md-table-cell>{{ing.kcal}}</md-table-cell>
-                <md-table-cell>{{ing.portion}}</md-table-cell>
-            </md-table-row>
-    </md-table>
-    <div>
-        Total kcal {{totalKcal}}
-    </div>
+        <IngredientTable v-if="simpleShake" :shake-arr="simpleShakeArr"/>
     </div>
 </template>
 
 <script>
 import {generateSimpleShake} from '@/api/shake.js'
+import IngredientTable from './IngredientTable.vue'
 
 export default {
     name: 'SimpleShake',
+    components: {
+        IngredientTable,
+    },
     data() {
         return {
-            simpleShake: {}
+            simpleShake: null
         }
     },
     methods: {
@@ -41,9 +30,6 @@ export default {
         simpleShakeArr() {
             return Object.entries(this.simpleShake).map(arr => arr[1])
         },
-        totalKcal() {
-            return this.simpleShakeArr.map(it => it.kcal).reduce((acc, it) => acc + it, 0)
-        }
     }
 }
 </script>

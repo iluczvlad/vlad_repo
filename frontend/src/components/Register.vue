@@ -28,6 +28,13 @@
                 <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
                 <span class="md-error" v-else-if="!$v.form.password.minlength">Invalid password</span>
             </md-field>
+            <!--added by vlad-->
+            <md-field :class="getValidationClass('password')">
+                <label for="password">Re-Enter Password</label>
+                <md-input name="password" type="password" id="password" autocomplete="family-name" v-model="form.password" :disabled="sending" />
+                <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
+                <span class="md-error" v-else-if="!$v.form.password.minlength">The two passwords do not match</span>
+            </md-field>
             </md-card-content>
 
             <md-progress-bar md-mode="indeterminate" v-if="sending" />

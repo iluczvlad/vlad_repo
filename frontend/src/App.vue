@@ -10,12 +10,29 @@
 
 <script>
 import Header from "@/components/Header.vue"
+import * as storage from '@/service/storage'
 
 export default {
   name: 'app',
   components: {
     Header,
-  }
+  },
+  // data() {
+  //   return {
+  //     userLoggedIn: storage.isLoggedIn()
+  //   }
+  // },
+  // watch: {
+  //   $route() {
+  //     this.userLoggedIn = storage.isLoggedIn()
+  //   }
+  // },
+  // computed: {
+  //   userLoggedIn(){
+  //     debugger
+  //     return this.$refs.header.userLoggedIn
+  //   }
+  // }
 }
 </script>
 
@@ -30,5 +47,9 @@ export default {
 }
 .app__spacer {
   height: 20px;
+}
+input{
+  color: black !important;
+  -webkit-text-fill-color: black !important;
 }
 </style>

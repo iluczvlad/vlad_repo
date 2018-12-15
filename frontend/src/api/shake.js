@@ -33,6 +33,7 @@ export function generateSimpleShake(){
 
 export function generateComplexShake(recipe) {
     const headers = initHeaders()
+    const body = JSON.stringify(recipe)
     headers.append('Authorization', getAuth())
-    return fetch(new Request(`/api/nl/shake/complex`), init("POST", initHeaders(), recipe)).then((response) => response.json());
+    return fetch(new Request(`/api/nl/shake/complex`), init("POST", initHeaders(), body)).then((response) => response.json());
 }

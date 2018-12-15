@@ -2,7 +2,13 @@ INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, 
 INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (2, 0, 0, 47, 'banana', '1 pcs', 0, 'NORMAL', 'SOLID', 1);
 INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (3, 0, 1, 44, 'milk', '150 ml', 0, 'NORMAL', 'LIQUID', 0);
 INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (4, 0, 1, 50, 'yogurt', '150 ml', 0, 'NORMAL', 'LIQUID', 0);
-INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (5, 0, 0, 77, 'honey', '25 ml', 0, 'NORMAL', 'SPICE', 1);
-INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (6, 0, 0, 86, 'sugar', '25 g', 0, 'NORMAL', 'SPICE', 1);
+INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (5, 1, 0, 77, 'honey', '25 ml', 1, 'NORMAL', 'SPICE', 1);
+INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (6, 0, 0, 86, 'sugar', '25 g', 1, 'NORMAL', 'SPICE', 1);
 INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (7, 0, 0, 60, 'orange', '1 pcs', 0, 'NORMAL', 'SOLID', 1);
 INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (8, 0, 0, 55, 'pomegranate', '1/2 pcs', 0, 'NORMAL', 'SOLID', 1);
+INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (9, 0, 0, 33, 'almond milk', '150 ml', 0, 'NORMAL', 'LIQUID', 1);
+INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (10, 0, 0, 0, 'ice', '3 cubes', 0, 'COLD', 'SOLID', 1);
+INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (11, 0, 0, 0, 'stevia', '1 g', 1, 'NORMAL', 'SPICED', 1);
+INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (12, 1, 0, 5, 'cucumber', '1 pcs', 0, 'NORMAL', 'SOLID', 1);
+INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (13, 1, 0, 2, 'ginger', '1 tsp', 0, 'NORMAL', 'SOLID', 1);
+INSERT INTO `appdb`.`ingredient` (`id`, `detox`, `has_lactose`, `kcal`, `name`, `portion`, `sweetener`, `temp`, `type`, `vegan`) VALUES (14, 1, 0, 0, 'water', '150 ml', 0, 'NORMAL', 'LIQUID', 1);

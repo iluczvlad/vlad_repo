@@ -30,13 +30,8 @@ export default {
         logout() {
             storage.logout()
             this.userLoggedIn = false
+            this.$router.push('/simple')
         }
-    },
-    computed: {
-        // userLoggedIn() {
-        //     console.log('loggedIn: ' + storage.isLoggedIn())
-        //     return storage.isLoggedIn()
-        // }
     },
     watch: {
         $route() {
