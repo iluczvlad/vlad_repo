@@ -1,4 +1,14 @@
+import {getAuth} from '@/service/storage'
 
+var myHeaders = new Headers();
+myHeaders.append('Content-Type', 'application/json');
+
+var myInit = {
+    method: 'GET',
+    headers: myHeaders,
+    mode: 'cors',
+    cache: 'default' 
+};
 
 const initHeaders = function() {
     const myHeaders = new Headers();
@@ -12,7 +22,7 @@ const init = function(method, headers, body) {
         headers: headers,
         mode: 'cors',
         cache: 'default',
-        body,
+        body: body,
     }
 };
 
@@ -29,4 +39,16 @@ export function registerUser(user, withJson) {
         }
         return
     });
+}
+
+export function getUserByEmail(email){
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/user`), init("POST", headers, email)).then((response) => response.json());
+}
+
+export function saveUserPreferences(dto){
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/user/prefs`), init("POST", headers, JSON.stringify(dto))).then((response) => response.ok);
 }

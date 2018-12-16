@@ -30,8 +30,8 @@
             </md-field>
             <!--added by vlad-->
             <md-field :class="getValidationClass('password')">
-                <label for="password">Re-Enter Password</label>
-                <md-input name="password" type="password" id="password" autocomplete="family-name" v-model="form.password" :disabled="sending" />
+                <label for="password1">Re-Enter Password</label>
+                <md-input name="password" type="password" id="password1" autocomplete="family-name" v-model="form.password" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
                 <span class="md-error" v-else-if="!$v.form.password.minlength">The two passwords do not match</span>
             </md-field>
@@ -120,7 +120,6 @@ export default {
       validateUser () {
         this.$v.$touch()
         if (!this.$v.$invalid) {
-          debugger
           this.saveUser()
         }
       }

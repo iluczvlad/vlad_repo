@@ -18,6 +18,11 @@ public class Ingredient {
     private Boolean hasLactose;
     private String portion;
     private Boolean sweetener;
+    public Ingredient(){
+    }
+    public Ingredient(Long id){
+        this.id=id;
+    }
 
     @Enumerated(EnumType.STRING)
     private Type type;

@@ -62,12 +62,23 @@
             <md-button class="md-raised" @click="makeComplexShake">{{generateButtonText}}</md-button>
         </div>
         <IngredientTable v-if="shake" :shake-arr="complexShakeArr"/>
+        <div v-if="hasMadeShake" class="md-layout-item">
+            <md-button class="md-raised" @click="addToFavs">Add to Favorites</md-button>
+            <md-button class="md-raised" @click="addToShpLst">Add to Shopping list</md-button>
+        </div>
+        <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showFavSnackbar">
+            <span>Added to Favorites</span>
+            <md-button class="md-primary" @click="showFavSnackbar = false">Ok</md-button>
+        </md-snackbar>
     </div>
 </template>
 
 <script>
 import {generateComplexShake} from '@/api/shake'
 import IngredientTable from './IngredientTable.vue'
+import * as storage from '@/service/storage'
+import {getUserByEmail} from '@/api/user'
+import {saveFavorite} from '@/api/favorite'
 
 export default {
     name: "ComplexShake",
@@ -89,11 +100,19 @@ export default {
             optionsHidden: false,
             hasMadeShake: false,
             shake: null,
+            showFavSnackbar: false,
+
         }
+    },
+    mounted(){
+        getUserByEmail(storage.getEmail()).then(user => {
+            this.options.lactose=user.lactoseIntolerant ? !user.lactoseIntolerant : true
+        })
     },
     methods: {
         toRecipe() {
             return {
+                userEmail: storage.getEmail(),
                 minKcal: parseInt(this.options.kcal.split('-')[0]),
                 maxKcal: parseInt(this.options.kcal.split('-')[1]),
                 detox: this.options.detox,
@@ -119,7 +138,20 @@ export default {
         },
         showOptions() {
             this.optionsHidden=false;
-        }
+        },
+        addToFavs(){
+            saveFavorite({
+                ingredients: this.complexShakeArr,
+                userEmail: storage.getEmail(),
+            }).then(ok=>{
+                if (ok){
+                    this.showFavSnackbar = true
+                }
+            })
+        },
+        addToShpLst(){
+
+        },
     },
     computed: {
         generateButtonText(){
@@ -133,17 +165,28 @@ export default {
 </script>
 
 <style scoped>
-.md-layout{
+.md-layout {
     flex-direction: column;
     justify-content: center;
 }
-.options-initial{
+.options-initial {
     max-height: 100%;
     overflow: hidden;
-    transition: max-height 0s ease;
 }
+
+@keyframes maxheight {
+    from {
+        max-height: 100%;
+    }
+    to {
+        max-height: 0;
+    }
+}
+
 .hidden{
     max-height: 0;
+    animation: maxheight 0s;
+    animation-timing-function: ease-out;
 }
 .item--margin-auto{
     margin: auto;

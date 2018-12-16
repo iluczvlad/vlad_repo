@@ -17,22 +17,6 @@ export default {
   components: {
     Header,
   },
-  // data() {
-  //   return {
-  //     userLoggedIn: storage.isLoggedIn()
-  //   }
-  // },
-  // watch: {
-  //   $route() {
-  //     this.userLoggedIn = storage.isLoggedIn()
-  //   }
-  // },
-  // computed: {
-  //   userLoggedIn(){
-  //     debugger
-  //     return this.$refs.header.userLoggedIn
-  //   }
-  // }
 }
 </script>
 
@@ -51,5 +35,8 @@ export default {
 input{
   color: black !important;
   -webkit-text-fill-color: black !important;
+}
+.md-button-content{
+  text-transform: none;
 }
 </style>

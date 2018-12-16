@@ -27,7 +27,7 @@ public class ShakeController {
         return new ResponseEntity<>(shakeService.generateSimpleShake(), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/nl/shake/complex", method = RequestMethod.POST)
+    @RequestMapping(value = "/li/shake/complex", method = RequestMethod.POST)
     public ResponseEntity<ComplexShakeDTO> complex(@RequestBody RecipeDTO dto) {
         return new ResponseEntity<>(shakeService.generateComplexShake(dto), HttpStatus.OK);
     }

@@ -21,6 +21,11 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/li/user", method = RequestMethod.POST)
+    public ResponseEntity<UserDTO> getByEmail(@RequestBody String email) {
+        return new ResponseEntity<>(userService.getByEmail(email), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/li/user/{id_usr}", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> get(@PathVariable Long id_usr) {
         return new ResponseEntity<>(userService.get(id_usr), HttpStatus.OK);
@@ -30,6 +35,12 @@ public class UserController {
     public ResponseEntity<UserDTO> save(@RequestBody UserDTO dto) {
         userService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/li/user/prefs", method = RequestMethod.POST)
+    public ResponseEntity<UserDTO> prefs(@RequestBody UserDTO dto) {
+        userService.savePreferences(dto);
+        return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
 }

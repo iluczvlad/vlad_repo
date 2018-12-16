@@ -1,8 +1,7 @@
 package com.vlad.backend.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class User {
@@ -12,6 +11,11 @@ public class User {
     private String email;
     private String password;
     private String name;
+    private Boolean diabetic;
+    private Boolean lactoseIntolerant;
+    @ManyToMany
+    private List<Ingredient> allergies;
+
 
     public Long getId() { return id; }
 
@@ -42,4 +46,29 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Boolean getDiabetic() {
+        return diabetic;
+    }
+
+    public void setDiabetic(Boolean diabetic) {
+        this.diabetic = diabetic;
+    }
+
+    public Boolean getLactoseIntolerant() {
+        return lactoseIntolerant;
+    }
+
+    public void setLactoseIntolerant(Boolean lactoseIntolerant) {
+        this.lactoseIntolerant = lactoseIntolerant;
+    }
+
+    public List<Ingredient> getAllergies() {
+        return allergies;
+    }
+
+    public void setAllergies(List<Ingredient> allergies) {
+        this.allergies = allergies;
+    }
+
 }

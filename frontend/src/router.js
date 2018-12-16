@@ -4,6 +4,9 @@ import Register from '@/components/Register.vue'
 import Login from '@/components/Login.vue'
 import ComplexShake from '@/components/ComplexShake.vue'
 import * as storage from '@/service/storage'
+import PermPrefs from '@/components/PermPrefs.vue'
+import ShoppingList from '@/components/ShoppingList.vue'
+import Favorites from '@/components/Favorites.vue'
 
 
 const router = new VueRouter({
@@ -34,6 +37,18 @@ const router = new VueRouter({
         {
             path: '/login',
             component: Login,
+        },
+        {
+            path: '/prefs',
+            component: PermPrefs,
+        },
+        {
+            path: '/shplst',
+            component: ShoppingList,
+        },
+        {
+            path: '/favs',
+            component: Favorites,
         }
     ]
 })

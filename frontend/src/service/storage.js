@@ -20,5 +20,5 @@ export function isLoggedIn() {
 }
 
 export function getEmail(){
-    return JSON.parse(window.localStorage.getItem(emailKey))
+    return window.localStorage.getItem(emailKey)
 }

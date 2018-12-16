@@ -3,6 +3,7 @@ package com.vlad.backend.dto;
 import com.vlad.backend.model.Temperature;
 
 public class RecipeDTO {
+    private String userEmail;
     private Integer minKcal;
     private Integer maxKcal;
     private Boolean detox;
@@ -12,6 +13,14 @@ public class RecipeDTO {
     private Integer maxsol;
     private Integer maxliq;
     private Boolean lactose;
+
+    public String getUserEmail() {
+        return userEmail;
+    }
+
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
+    }
 
     public Integer getMinKcal() {
         return minKcal;

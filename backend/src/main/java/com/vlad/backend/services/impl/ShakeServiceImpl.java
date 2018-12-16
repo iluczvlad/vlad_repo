@@ -1,35 +1,35 @@
 package com.vlad.backend.services.impl;
 
 import com.vlad.backend.dto.ComplexShakeDTO;
-import com.vlad.backend.dto.IngredientDTO;
 import com.vlad.backend.dto.RecipeDTO;
 import com.vlad.backend.dto.SimpleShakeDTO;
 import com.vlad.backend.model.Ingredient;
 import com.vlad.backend.model.Temperature;
 import com.vlad.backend.model.Type;
+import com.vlad.backend.model.User;
 import com.vlad.backend.repositories.IngredientRepository;
+import com.vlad.backend.repositories.UserRepository;
 import com.vlad.backend.services.IngredientService;
 import com.vlad.backend.services.ShakeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
-import java.util.function.Consumer;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
 public class ShakeServiceImpl implements ShakeService {
     private final IngredientService ingredientService;
     private final IngredientRepository ingredientRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public ShakeServiceImpl(IngredientService ingredientService,
-                            IngredientRepository ingredientRepository) {
+                            IngredientRepository ingredientRepository, UserRepository userRepository) {
         this.ingredientService = ingredientService;
         this.ingredientRepository = ingredientRepository;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -58,10 +58,13 @@ public class ShakeServiceImpl implements ShakeService {
 
     @Override
     public ComplexShakeDTO generateComplexShake(RecipeDTO recipe) {
+        User user = userRepository.findByEmail(recipe.getUserEmail());
         ComplexShakeDTO dto = new ComplexShakeDTO();
         Long kCounter = 0L;
-        List<Ingredient> all = ingredientRepository.findAll();
+        final List<Ingredient> allWithAllergies = ingredientRepository.findAll();
         Random random = new Random();
+        user.getAllergies().forEach(allWithAllergies::remove);
+        List<Ingredient> all = allWithAllergies;
         if (recipe.getDetox()){
             all=all.stream().filter(Ingredient::getDetox).collect(Collectors.toList());
         }
@@ -85,10 +88,12 @@ public class ShakeServiceImpl implements ShakeService {
             all=all.stream().filter(it -> it.getTemp().equals(Temperature.NORMAL)).collect(Collectors.toList());
         }
         if (recipe.getSweetener()){
-            //TODO diabetus
             List<Ingredient> sweeteners = all.stream()
                     .filter(Ingredient::getSweetener)
                     .collect(Collectors.toList());
+            if (user.getDiabetic()){
+                sweeteners = sweeteners.stream().filter(it -> it.getType().equals(Type.SPICED)).collect(Collectors.toList());
+            }
             Ingredient sweetener = sweeteners.get(random.nextInt(sweeteners.size()));
             dto.getSpices().add(ingredientService.toDto(sweetener));
             all.remove(sweetener);
@@ -121,6 +126,7 @@ public class ShakeServiceImpl implements ShakeService {
                 kCounter += solid.getKcal();
             }
         }
+        //TODO take care of solids
 
 
 
