@@ -2,6 +2,7 @@ package com.vlad.backend.model;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -15,6 +16,8 @@ public class User {
     private Boolean lactoseIntolerant;
     @ManyToMany
     private List<Ingredient> allergies;
+    @ManyToMany
+    private Set<Ingredient> shoppingList;
 
 
     public Long getId() { return id; }
@@ -71,4 +74,11 @@ public class User {
         this.allergies = allergies;
     }
 
+    public Set<Ingredient> getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(Set<Ingredient> shoppingList) {
+        this.shoppingList = shoppingList;
+    }
 }

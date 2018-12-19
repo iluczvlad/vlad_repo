@@ -52,3 +52,15 @@ export function saveUserPreferences(dto){
     headers.append('Authorization', getAuth())
     return fetch(new Request(`/api/li/user/prefs`), init("POST", headers, JSON.stringify(dto))).then((response) => response.ok);
 }
+
+export function addToShoppingList(userId, lst){
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/user/${userId}/shplst`), init("POST", headers, JSON.stringify(lst))).then((response) => response.ok);
+}
+
+export function deleteFromShoppingList(userId, id){
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/user/${userId}/shplst/${id}`), init("DELETE", headers)).then((response) => response.ok);
+}

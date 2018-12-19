@@ -1,5 +1,6 @@
 package com.vlad.backend.services.impl;
 
+import com.vlad.backend.dto.IngredientDTO;
 import com.vlad.backend.dto.UserDTO;
 import com.vlad.backend.model.Ingredient;
 import com.vlad.backend.model.User;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -37,6 +39,7 @@ public class UserServiceImpl implements UserService {
             dto.setEmail(user.getEmail());
             dto.setName(user.getName());
             dto.setPassword(user.getPassword());
+            dto.setShoppingList(user.getShoppingList().stream().map(ingredientService::toDto).collect(Collectors.toSet()));
 
 //            return new UserDTO(User.getId(), User.getName());
             return dto;
@@ -55,6 +58,7 @@ public class UserServiceImpl implements UserService {
         dto.setDiabetic(user.getDiabetic());
         dto.setLactoseIntolerant((user.getLactoseIntolerant()));
         dto.setAllergies(user.getAllergies().stream().map(ingredientService::toDto).collect(Collectors.toList()));
+        dto.setShoppingList(user.getShoppingList().stream().map(ingredientService::toDto).collect(Collectors.toSet()));
         return dto;
     }
 
@@ -75,6 +79,23 @@ public class UserServiceImpl implements UserService {
         user.setAllergies(dto.getAllergies().stream().map(it -> new Ingredient(it.getId())).collect(Collectors.toList()));
         user.setDiabetic(dto.getDiabetic());
         user.setLactoseIntolerant(dto.getLactoseIntolerant());
+        userRepository.save(user);
+    }
+
+    @Override
+    public void addToShoppingList(Long userId, List<IngredientDTO> shplst) {
+        User user = userRepository.findById(userId).get();
+        user.getShoppingList().addAll(shplst
+                .stream()
+                .map(it -> new Ingredient(it.getId()))
+                .collect(Collectors.toSet()));
+        userRepository.save(user);
+    }
+
+    @Override
+    public void deleteFromShoppingList(Long userId, Long id) {
+        User user = userRepository.findById(userId).get();
+        user.getShoppingList().remove(new Ingredient(id));
         userRepository.save(user);
     }
 }

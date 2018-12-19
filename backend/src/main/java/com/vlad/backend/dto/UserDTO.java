@@ -1,6 +1,7 @@
 package com.vlad.backend.dto;
 
 import java.util.List;
+import java.util.Set;
 
 public class UserDTO {
     private Long id;
@@ -10,6 +11,7 @@ public class UserDTO {
     private Boolean diabetic;
     private Boolean lactoseIntolerant;
     private List<IngredientDTO> allergies;
+    private Set<IngredientDTO> shoppingList;
 
     public UserDTO() {
     }
@@ -59,5 +61,13 @@ public class UserDTO {
 
     public void setAllergies(List<IngredientDTO> allergies) {
         this.allergies = allergies;
+    }
+
+    public Set<IngredientDTO> getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(Set<IngredientDTO> shoppingList) {
+        this.shoppingList = shoppingList;
     }
 }

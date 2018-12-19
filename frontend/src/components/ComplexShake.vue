@@ -61,14 +61,23 @@
         <div class="md-layout-item item--margin-auto">    
             <md-button class="md-raised" @click="makeComplexShake">{{generateButtonText}}</md-button>
         </div>
-        <IngredientTable v-if="shake" :shake-arr="complexShakeArr"/>
-        <div v-if="hasMadeShake" class="md-layout-item">
-            <md-button class="md-raised" @click="addToFavs">Add to Favorites</md-button>
-            <md-button class="md-raised" @click="addToShpLst">Add to Shopping list</md-button>
+        <IngredientTable v-if="shake"
+                         :shake-arr="complexShakeArr"
+                         :show-check-box="true"
+                         @change="updateShoppingList"/>
+        <div v-if="hasMadeShake" class="md-layout-item item--margin-auto">
+            <md-button class="md-raised" @click="addToFavs">Add Recipe to Favorites</md-button>
+        </div>
+        <div v-if="hasMadeShake" class="md-layout-item item--margin-auto">
+            <md-button class="md-raised" @click="addToShpLst">Add Items to Shopping list</md-button>
         </div>
         <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showFavSnackbar">
             <span>Added to Favorites</span>
             <md-button class="md-primary" @click="showFavSnackbar = false">Ok</md-button>
+        </md-snackbar>
+        <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showShoppingListSnackbar">
+            <span>Added to Shopping List</span>
+            <md-button class="md-primary" @click="showShoppingListSnackbar = false">Ok</md-button>
         </md-snackbar>
     </div>
 </template>
@@ -77,7 +86,7 @@
 import {generateComplexShake} from '@/api/shake'
 import IngredientTable from './IngredientTable.vue'
 import * as storage from '@/service/storage'
-import {getUserByEmail} from '@/api/user'
+import {getUserByEmail, addToShoppingList} from '@/api/user'
 import {saveFavorite} from '@/api/favorite'
 
 export default {
@@ -101,12 +110,16 @@ export default {
             hasMadeShake: false,
             shake: null,
             showFavSnackbar: false,
+            shoppingList: [],
+            user: null,
+            showShoppingListSnackbar: false,
 
         }
     },
     mounted(){
         getUserByEmail(storage.getEmail()).then(user => {
             this.options.lactose=user.lactoseIntolerant ? !user.lactoseIntolerant : true
+            this.user=user
         })
     },
     methods: {
@@ -129,10 +142,7 @@ export default {
             this.optionsHidden=true
             this.hasMadeShake=true
             generateComplexShake(this.toRecipe()).then((shake)=>{
-                //console.log(shake)
-                console.table(shake.liquids)
-                console.table(shake.solids)
-                console.table(shake.spices)
+
                 this.shake=shake
             })
         },
@@ -149,8 +159,15 @@ export default {
                 }
             })
         },
+        updateShoppingList(shoppingList){
+            this.shoppingList=shoppingList
+        },
         addToShpLst(){
-
+            addToShoppingList(this.user.id, this.shoppingList).then(ok => {
+                if (ok){
+                    this.showShoppingListSnackbar =true
+                }
+            })
         },
     },
     computed: {

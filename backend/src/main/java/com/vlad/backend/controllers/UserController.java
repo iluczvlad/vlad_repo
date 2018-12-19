@@ -1,11 +1,14 @@
 package com.vlad.backend.controllers;
 
+import com.vlad.backend.dto.IngredientDTO;
 import com.vlad.backend.dto.UserDTO;
 import com.vlad.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -43,4 +46,15 @@ public class UserController {
         return new ResponseEntity<>(dto, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/li/user/{userId}/shplst", method = RequestMethod.POST)
+    public ResponseEntity shplst(@PathVariable Long userId, @RequestBody List<IngredientDTO> shplst) {
+        userService.addToShoppingList(userId, shplst);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/li/user/{userId}/shplst/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity shplstDelete(@PathVariable Long userId, @PathVariable Long id) {
+        userService.deleteFromShoppingList(userId, id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
