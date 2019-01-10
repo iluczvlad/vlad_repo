@@ -59,18 +59,35 @@
                 Sign Out
             </md-button>
         </div>
+        <md-snackbar md-position="center" :md-duration="20000" :md-active.sync="notificationActive">
+            <span>You can configure some personal preferences.</span>
+            <md-button class="md-raised md-accent" @click="notificationActive = false">
+                Dismiss
+            </md-button>
+            <router-link to="/prefs" tag="div">
+                <md-button class="md-raised md-primary" @click="setNotified">
+                    Preferences
+                </md-button>
+            </router-link>
+        </md-snackbar>
     </div>
 </template>
 
 <script>
 import * as storage from '@/service/storage'
+import {getUserByEmail,  setNotified} from '@/api/user'
 
 export default {
     data() {
         return {
             userLoggedIn: storage.isLoggedIn(),
             showNavigation: false,
+            notificationActive: false,
+            userId: null,
         }
+    },
+    mounted(){
+        this.checkNotification()
     },
     methods: {
         logout() {
@@ -80,11 +97,27 @@ export default {
         },
         toggleNavigation() {
             this.showNavigation=!this.showNavigation
-        }
+        },
+        checkNotification() {
+            if (this.userLoggedIn) {
+                getUserByEmail(storage.getEmail()).then(user => {
+                    this.userId = user.id
+                    this.notificationActive = !user.noticed
+                })
+            }
+        },
+        setNotified() {
+            setNotified({
+                id: this.userId,
+                noticed: true,
+            }).then(() => this.notificationActive = false)
+        },
     },
     watch: {
-        $route() {
+        $route(route, oldRoute) {
             this.userLoggedIn = storage.isLoggedIn()
+            if (route.path === '/complex' && oldRoute.path === '/login')
+                this.checkNotification()
         }
     }
 }

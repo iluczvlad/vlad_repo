@@ -1,5 +1,6 @@
 const authorizationKey='authorizationKey'
 const emailKey='emailKey'
+const notifiedKey='notified'
 
 export function login(email, password) {
     window.localStorage.setItem(authorizationKey, 'Basic ' + btoa(email + ':' + password))

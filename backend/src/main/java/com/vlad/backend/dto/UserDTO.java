@@ -12,6 +12,7 @@ public class UserDTO {
     private Boolean lactoseIntolerant;
     private List<IngredientDTO> allergies;
     private Set<IngredientDTO> shoppingList;
+    private Boolean noticed;
 
     public UserDTO() {
     }
@@ -69,5 +70,13 @@ public class UserDTO {
 
     public void setShoppingList(Set<IngredientDTO> shoppingList) {
         this.shoppingList = shoppingList;
+    }
+
+    public Boolean getNoticed() {
+        return noticed;
+    }
+
+    public void setNoticed(Boolean noticed) {
+        this.noticed = noticed;
     }
 }

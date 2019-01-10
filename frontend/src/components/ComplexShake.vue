@@ -141,10 +141,14 @@ export default {
             //console.log(this.toRecipe())
             this.optionsHidden=true
             this.hasMadeShake=true
-            generateComplexShake(this.toRecipe()).then((shake)=>{
+            try {
+                generateComplexShake(this.toRecipe()).then((shake)=>{
 
                 this.shake=shake
             })
+            }catch(e){
+                console.log(e);
+            }
         },
         showOptions() {
             this.optionsHidden=false;

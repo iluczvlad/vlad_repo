@@ -18,6 +18,7 @@ public class User {
     private List<Ingredient> allergies;
     @ManyToMany
     private Set<Ingredient> shoppingList;
+    private Boolean noticed;
 
 
     public Long getId() { return id; }
@@ -80,5 +81,13 @@ public class User {
 
     public void setShoppingList(Set<Ingredient> shoppingList) {
         this.shoppingList = shoppingList;
+    }
+
+    public Boolean getNoticed() {
+        return noticed;
+    }
+
+    public void setNoticed(Boolean noticed) {
+        this.noticed = noticed;
     }
 }

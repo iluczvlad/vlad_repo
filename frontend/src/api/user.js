@@ -47,6 +47,11 @@ export function getUserByEmail(email){
     return fetch(new Request(`/api/li/user`), init("POST", headers, email)).then((response) => response.json());
 }
 
+export function checkEmail(email){
+    const headers = initHeaders()
+    return fetch(new Request(`/api/nl/user/check-email`), init("POST", headers, email)).then((response) => response.text());
+}
+
 export function saveUserPreferences(dto){
     const headers = initHeaders()
     headers.append('Authorization', getAuth())
@@ -63,4 +68,10 @@ export function deleteFromShoppingList(userId, id){
     const headers = initHeaders()
     headers.append('Authorization', getAuth())
     return fetch(new Request(`/api/li/user/${userId}/shplst/${id}`), init("DELETE", headers)).then((response) => response.ok);
+}
+
+export function setNotified(dto){
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/user/notified`), init("POST", headers, JSON.stringify(dto))).then((response) => response.ok);
 }

@@ -14,4 +14,6 @@ public interface UserService {
     void savePreferences(UserDTO dto);
     void addToShoppingList(Long userId, List<IngredientDTO> shplst);
     void deleteFromShoppingList(Long userId, Long id);
+    void saveNotified(UserDTO dto);
+    Boolean checkEmail(String email);
 }

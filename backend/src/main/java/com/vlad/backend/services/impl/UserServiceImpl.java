@@ -51,6 +51,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDTO getByEmail(String email) {
         User user = userRepository.findByEmail(email);
+        if (user == null) {
+            return new UserDTO();
+        }
         UserDTO dto = new UserDTO();
         dto.setId(user.getId());
         dto.setEmail(user.getEmail());
@@ -59,6 +62,7 @@ public class UserServiceImpl implements UserService {
         dto.setLactoseIntolerant((user.getLactoseIntolerant()));
         dto.setAllergies(user.getAllergies().stream().map(ingredientService::toDto).collect(Collectors.toList()));
         dto.setShoppingList(user.getShoppingList().stream().map(ingredientService::toDto).collect(Collectors.toSet()));
+        dto.setNoticed(user.getNoticed());
         return dto;
     }
 
@@ -68,6 +72,7 @@ public class UserServiceImpl implements UserService {
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.setNoticed(false);
         userRepository.save(user);
     }
 
@@ -97,5 +102,18 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(userId).get();
         user.getShoppingList().remove(new Ingredient(id));
         userRepository.save(user);
+    }
+
+    @Override
+    public void saveNotified(UserDTO dto) {
+        User user = userRepository.findById(dto.getId()).get();
+        user.setNoticed(dto.getNoticed());
+        userRepository.save(user);
+    }
+
+    @Override
+    public Boolean checkEmail(String email) {
+        User user = userRepository.findByEmail(email);
+        return user != null;
     }
 }
