@@ -1,5 +1,5 @@
 <template>
-    <div class="md-layout">
+    <div class="md-layout transparent-layout">
         <div class="md-layout options-initial" :class="{hidden: optionsHidden}">
             <div class="md-layout-item">
                 <md-field>
@@ -53,32 +53,34 @@
                 <md-radio class="md-primary" v-model="options.temp" :value="1">Cold Temp</md-radio>
             </div>
         </div>
-        <div class="md-layout-item item--margin-auto">
-            <md-button class="md-icon-button md-primary" v-if="optionsHidden" @click="showOptions">
-                <md-icon>arrow_drop_down_circle</md-icon>
+        <div class="md-layout-item buttons">
+            <div style="width: 52px"></div>
+            <md-button class="md-icon-button md-raised" @click="makeComplexShake">
+                <md-icon>local_drink</md-icon>
             </md-button>
-        </div>
-        <div class="md-layout-item item--margin-auto">    
-            <md-button class="md-raised" @click="makeComplexShake">{{generateButtonText}}</md-button>
+            <md-button class="md-icon-button md-accent" v-if="optionsHidden" @click="showOptions">
+                <md-icon>close</md-icon>
+            </md-button>
+            <div v-if="!optionsHidden" style="width: 52px"></div>
         </div>
         <IngredientTable v-if="shake"
                          :shake-arr="complexShakeArr"
                          :show-check-box="true"
                          @change="updateShoppingList"/>
-        <div v-if="hasMadeShake" class="md-layout-item item--margin-auto">
+        <div v-if="hasMadeShake && shake" class="md-layout-item item--margin-auto">
             <md-button class="md-raised" @click="addToFavs">Add Recipe to Favorites</md-button>
         </div>
-        <div v-if="hasMadeShake" class="md-layout-item item--margin-auto">
+        <!-- <div v-if="hasMadeShake" class="md-layout-item item--margin-auto">
             <md-button class="md-raised" @click="addToShpLst">Add Items to Shopping list</md-button>
-        </div>
+        </div> -->
         <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showFavSnackbar">
             <span>Added to Favorites</span>
             <md-button class="md-primary" @click="showFavSnackbar = false">Ok</md-button>
         </md-snackbar>
-        <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showShoppingListSnackbar">
+        <!-- <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showShoppingListSnackbar">
             <span>Added to Shopping List</span>
             <md-button class="md-primary" @click="showShoppingListSnackbar = false">Ok</md-button>
-        </md-snackbar>
+        </md-snackbar> -->
     </div>
 </template>
 
@@ -152,6 +154,7 @@ export default {
         },
         showOptions() {
             this.optionsHidden=false;
+            this.shake=null;
         },
         addToFavs(){
             saveFavorite({
@@ -211,5 +214,12 @@ export default {
 }
 .item--margin-auto{
     margin: auto;
+}
+
+.buttons{
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 </style>

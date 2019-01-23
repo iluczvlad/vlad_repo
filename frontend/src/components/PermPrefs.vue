@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="transparent-layout">
         <div class="md-layout">
             <div class="md-layout-item item--margin-auto">    
                 <md-button class="md-raised" @click="savePreferences">Save</md-button>
@@ -101,4 +101,5 @@ export default {
 .item__alergy > * {
     margin: 3px;
 }
+
 </style>

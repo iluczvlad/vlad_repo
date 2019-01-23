@@ -126,8 +126,7 @@ export default {
 <style scoped>
 .header{
     width: 100%;
-    height: 50px;
-    background-color: green;
+    background-color: rgba(255, 255, 255, .3);
     display: flex;
     justify-content: space-between;
     align-items: center;

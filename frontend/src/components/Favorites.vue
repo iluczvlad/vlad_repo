@@ -1,10 +1,10 @@
 <template>
-    <div class="md-layout">
-        <md-card class="md-layout-item" v-for="(fav, index) of favorites" :key="fav.id" md-with-hover>
+    <div class="md-layout transparent-layout">
+        <md-card class="md-layout-item fav-card" v-for="(fav, index) of favorites" :key="fav.id" md-with-hover>
             <md-ripple>
                 <md-card-header>
                     <div class="md-title">
-                        <div>{{'#' + index}}</div>
+                        <div>{{'#' + (index+1)}}</div>
                         <md-button class="md-icon-button md-raised md-accent delete-button"
                                     @click="removeFavorite(fav, index)">
                             <md-icon>delete_forever</md-icon>
@@ -59,9 +59,11 @@ export default {
 <style scoped>
 .md-layout{
     flex-direction: column;
+    align-items: center;
 }
 .md-layout-item{
     margin-bottom: 4px;
+    width: 50%;
 }
 .md-title{
     display: flex;
