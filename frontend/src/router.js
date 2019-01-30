@@ -7,7 +7,7 @@ import * as storage from '@/service/storage'
 import PermPrefs from '@/components/PermPrefs.vue'
 import ShoppingList from '@/components/ShoppingList.vue'
 import Favorites from '@/components/Favorites.vue'
-
+import Contact from '@/components/Contact.vue'
 
 const router = new VueRouter({
     routes: [
@@ -49,6 +49,10 @@ const router = new VueRouter({
         {
             path: '/favs',
             component: Favorites,
+        },
+        {
+            path: '/contact',
+            component: Contact,
         }
     ]
 })

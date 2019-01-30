@@ -1,11 +1,22 @@
 <template>
     <div class="header">
         
-        <md-button class="md-icon-button" @click="toggleNavigation">
-            <md-icon>menu</md-icon>
-        </md-button>
+        <div class="menu-icon-size">
+            <md-button class="md-icon-button" @click="toggleNavigation" v-if="userLoggedIn">
+                <md-icon>menu</md-icon>
+            </md-button>
+        </div>
+        
+        <router-link class="home-logo" to="/">
+            <div></div>
+        </router-link>
 
-        <md-drawer v-if="userLoggedIn" :md-active.sync="showNavigation">
+        <div class="log-buttons">
+            <md-button class="md-raised md-accent" @click="logout" v-if="userLoggedIn">
+                Sign Out
+            </md-button>
+            
+            <md-drawer v-if="userLoggedIn" :md-active.sync="showNavigation">
             <md-toolbar class="md-transparent" md-elevation="0">
                 <span class="md-title">Menu</span>
             </md-toolbar>
@@ -46,19 +57,8 @@
                     </md-list-item>
                 </router-link>
             </md-list>
-        </md-drawer>  
+        </md-drawer>
 
-        <div class="log-buttons">
-            <md-button class="md-raised md-primary" @click="$router.push('login')" v-if="!userLoggedIn">
-                Login
-            </md-button>
-            <md-button class="md-raised md-accent" @click="$router.push('register')"  v-if="!userLoggedIn">
-                Sign Up
-            </md-button>
-            <md-button class="md-raised md-accent" @click="logout" v-if="userLoggedIn">
-                Sign Out
-            </md-button>
-        </div>
         <md-snackbar md-position="center" :md-duration="20000" :md-active.sync="notificationActive">
             <span>You can configure some personal preferences.</span>
             <md-button class="md-raised md-accent" @click="notificationActive = false">
@@ -70,6 +70,7 @@
                 </md-button>
             </router-link>
         </md-snackbar>
+        </div>
     </div>
 </template>
 
@@ -115,6 +116,7 @@ export default {
     },
     watch: {
         $route(route, oldRoute) {
+            this.showNavigation = false
             this.userLoggedIn = storage.isLoggedIn()
             if (route.path === '/complex' && oldRoute.path === '/login')
                 this.checkNotification()
@@ -131,14 +133,17 @@ export default {
     justify-content: space-between;
     align-items: center;
 }
+.menu-icon-size {
+    width: 104px;
+}
 .md-drawer {
     width: 230px;
     max-width: calc(100vw - 125px);
   }
-.logo{
+.home-logo{
     width: 100px;
-    height: 100%;
-    background-color: aqua;
+    height: 90%;
+    background: grey;
     cursor: pointer;
 }
 </style>

@@ -47,7 +47,9 @@ export default {
   overflow: auto;
   padding: 10px 30px;
   background: rgba(255, 255, 255, .3) !important;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 input{
   color: black !important;

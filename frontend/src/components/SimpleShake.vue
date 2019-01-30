@@ -1,13 +1,26 @@
 <template>
     <div class="simple-shake">
-        <md-button class="md-raised" @click="makeSimpleShake">Make a Shake</md-button>
-        <IngredientTable v-if="simpleShake" :shake-arr="simpleShakeArr"/>
+        <!-- <md-button class="md-raised" @click="makeSimpleShake">Make a Shake</md-button>
+        <IngredientTable v-if="simpleShake" :shake-arr="simpleShakeArr"/> -->
+        <div class="central-logo"></div>
+        <div class="buttons-home">
+            <md-button class="md-raised md-primary" @click="$router.push('login')" v-if="!userLoggedIn">
+                Login
+            </md-button>
+            <md-button class="md-raised md-accent" @click="$router.push('register')"  v-if="!userLoggedIn">
+                Sign Up
+            </md-button>
+        </div>
+        <router-link to="/contact" class="contact-link">
+            Contact
+        </router-link>
     </div>
 </template>
 
 <script>
 import {generateSimpleShake} from '@/api/shake.js'
 import IngredientTable from './IngredientTable.vue'
+import * as storage from '@/service/storage'
 
 export default {
     name: 'SimpleShake',
@@ -16,7 +29,8 @@ export default {
     },
     data() {
         return {
-            simpleShake: null
+            simpleShake: null,
+            userLoggedIn: storage.isLoggedIn(),
         }
     },
     methods: {
@@ -38,14 +52,18 @@ export default {
 .simple-shake {
     display: flex;  
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    width: 100%
+    width: 100%;
+    height: 100%;
 }
-.simple-shake__table {
-    width: 75%;
+.central-logo {
+    width: 85%;
+    height: 275px;
+    background: grey;
+    margin-top: 80px;
 }
-.table__name {
-    text-transform: capitalize;
+.contact-link {
+    color: black !important;
 }
 </style>

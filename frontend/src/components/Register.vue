@@ -20,7 +20,7 @@
                 <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
                 <span class="md-error" v-if="!$v.form.email.required">The email is required</span>
                 <span class="md-error" v-else-if="!$v.form.email.email">Invalid email</span>
-                <span class="md-error" v-if="emailInUse">Email already in use</span>
+                <span class="md-error" v-else-if="!$v.form.email.isUnique">Email already in use</span>
             </md-field>
 
             <md-field :class="getValidationClass('password')">
@@ -91,7 +91,13 @@ export default {
         },
         email: {
           required,
-          email
+          email,
+          isUnique(value) {
+            if (value === '') return true
+            return new Promise((resolve, reject) => {
+              checkEmail(value).then((resp) => resolve((typeof resp === 'string') && resp === 'false'))
+            })
+          }
         }
       }
     },
@@ -129,14 +135,7 @@ export default {
       validateUser () {
         this.$v.$touch()
         if (!this.$v.$invalid) {
-          checkEmail(this.form.email).then((resp) => {
-            if (resp === 'false') {
-              this.emailInUse = false
-              this.saveUser()
-            } else {
-              this.emailInUse = true
-            }
-          })
+          this.saveUser()
         }
       }
     }
