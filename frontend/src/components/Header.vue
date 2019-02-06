@@ -22,33 +22,41 @@
             </md-toolbar>
 
             <md-list>
-                <router-link to="/prefs">
+                
+                <router-link to="/menu">
                     <md-list-item>
-                        <md-icon>person</md-icon>
-                        <span class="md-list-item-text">Preferences</span>
+                        <md-icon>list</md-icon>
+                        <span class="md-list-item-text">Menu</span>
                     </md-list-item>
                 </router-link>
 
-                <router-link to="/simple">
+                <router-link to="/recipes">
+                    <md-list-item>
+                        <md-icon>local_drink</md-icon>
+                        <span class="md-list-item-text">Our Recipes</span>
+                    </md-list-item>
+                </router-link>
+
+                <!-- <router-link to="/simple">
                     <md-list-item>
                         <md-icon>free_breakfast</md-icon>
                         <span class="md-list-item-text">Simple Shake</span>
                     </md-list-item>
-                </router-link>
+                </router-link> -->
 
                 <router-link to="/complex">
                     <md-list-item>
-                        <md-icon>local_drink</md-icon>
-                        <span class="md-list-item-text">Complex Shake</span>
+                        <md-icon>rotate_right</md-icon>
+                        <span class="md-list-item-text">Randomiser</span>
                     </md-list-item>
                 </router-link>
 
-                <router-link to="/shplst">
+                <!-- <router-link to="/shplst">
                     <md-list-item>
                         <md-icon>local_grocery_store</md-icon>
                         <span class="md-list-item-text">Shopping List</span>
                     </md-list-item>
-                </router-link>
+                </router-link> -->
 
                 <router-link to="/favs">
                     <md-list-item>
@@ -56,6 +64,14 @@
                         <span class="md-list-item-text">Favorites</span>
                     </md-list-item>
                 </router-link>
+
+                <router-link to="/prefs">
+                    <md-list-item>
+                        <md-icon>person</md-icon>
+                        <span class="md-list-item-text">Preferences</span>
+                    </md-list-item>
+                </router-link>
+
             </md-list>
         </md-drawer>
 

@@ -57,13 +57,15 @@ export default {
 </script>
 
 <style scoped>
+.fav-card{
+    width: 100%;
+}
 .md-layout{
     flex-direction: column;
     align-items: center;
 }
 .md-layout-item{
     margin-bottom: 4px;
-    width: 50%;
 }
 .md-title{
     display: flex;

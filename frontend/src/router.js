@@ -8,6 +8,8 @@ import PermPrefs from '@/components/PermPrefs.vue'
 import ShoppingList from '@/components/ShoppingList.vue'
 import Favorites from '@/components/Favorites.vue'
 import Contact from '@/components/Contact.vue'
+import Menu from '@/components/Menu.vue'
+import Recipes from '@/components/Recipes.vue'
 
 const router = new VueRouter({
     routes: [
@@ -53,6 +55,14 @@ const router = new VueRouter({
         {
             path: '/contact',
             component: Contact,
+        },
+        {
+            path: '/menu',
+            component: Menu,
+        },
+        {
+            path: '/recipes',
+            component: Recipes,
         }
     ]
 })

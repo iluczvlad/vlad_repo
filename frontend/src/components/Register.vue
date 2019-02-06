@@ -130,6 +130,9 @@ export default {
             this.userSaved = true
             this.sending = false
             this.clearForm()
+            setTimeout(()=>{
+              this.$router.push('/login')
+            },1500)
         })
       },
       validateUser () {

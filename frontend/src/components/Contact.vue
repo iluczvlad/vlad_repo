@@ -85,7 +85,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .contact-form {
     display: flex;
     justify-content: center;
