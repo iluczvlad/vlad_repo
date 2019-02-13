@@ -1,6 +1,7 @@
 package com.vlad.backend.controllers;
 
 import com.vlad.backend.dto.IngredientDTO;
+import com.vlad.backend.model.Type;
 import com.vlad.backend.services.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,11 @@ public class IngredientController {
     @RequestMapping(value = "/li/ingredient/{id}", method = RequestMethod.GET)
     public ResponseEntity<IngredientDTO> get(@PathVariable Long id) {
         return new ResponseEntity<>(ingredientService.get(id), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/li/ingredient/type/{type}/{email}", method = RequestMethod.GET)
+    public ResponseEntity<List<IngredientDTO>> get(@PathVariable Type type, @PathVariable String email) {
+        return new ResponseEntity<>(ingredientService.get(type, email), HttpStatus.OK);
     }
 
     @RequestMapping("/li/ingredient/list")

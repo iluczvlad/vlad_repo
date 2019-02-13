@@ -1,4 +1,4 @@
-import {getAuth} from '@/service/storage'
+import {getAuth, getEmail} from '@/service/storage'
 
 var myHeaders = new Headers();
 myHeaders.append('Content-Type', 'application/json');
@@ -28,6 +28,12 @@ const init = function(method, headers, body) {
 
 export function getIngredient(id) {
     return fetch(new Request(`/api/li/ingredient/${id}`), myInit).then((response) => response.json());
+}
+
+export function getIngredientsByType(type) {
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/ingredient/type/${type}/${getEmail()}`), init('GET', headers)).then((response) => response.json());
 }
 
 export function getAllIngredients(){
