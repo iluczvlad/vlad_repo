@@ -51,13 +51,6 @@
                     </md-list-item>
                 </router-link>
 
-                <!-- <router-link to="/shplst">
-                    <md-list-item>
-                        <md-icon>local_grocery_store</md-icon>
-                        <span class="md-list-item-text">Shopping List</span>
-                    </md-list-item>
-                </router-link> -->
-
                 <router-link to="/favs">
                     <md-list-item>
                         <md-icon>favorite</md-icon>
@@ -72,6 +65,12 @@
                     </md-list-item>
                 </router-link>
 
+                <router-link to="/shplst">
+                    <md-list-item>
+                        <md-icon>local_grocery_store</md-icon>
+                        <span class="md-list-item-text">Cart</span>
+                    </md-list-item>
+                </router-link>
             </md-list>
         </md-drawer>
 

@@ -13,4 +13,5 @@ public interface IngredientService {
     void delete(Long id);
     List<IngredientDTO> findAll();
     IngredientDTO toDto(Ingredient ingredient);
+    Ingredient toEntity(IngredientDTO dto);
 }

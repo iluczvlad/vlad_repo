@@ -11,7 +11,7 @@ public class UserDTO {
     private Boolean diabetic;
     private Boolean lactoseIntolerant;
     private List<IngredientDTO> allergies;
-    private Set<IngredientDTO> shoppingList;
+    private List<ShoppingItemDTO> shoppingList;
     private Boolean noticed;
 
     public UserDTO() {
@@ -64,11 +64,11 @@ public class UserDTO {
         this.allergies = allergies;
     }
 
-    public Set<IngredientDTO> getShoppingList() {
+    public List<ShoppingItemDTO> getShoppingList() {
         return shoppingList;
     }
 
-    public void setShoppingList(Set<IngredientDTO> shoppingList) {
+    public void setShoppingList(List<ShoppingItemDTO> shoppingList) {
         this.shoppingList = shoppingList;
     }
 

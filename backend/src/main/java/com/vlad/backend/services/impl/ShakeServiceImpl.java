@@ -91,7 +91,7 @@ public class ShakeServiceImpl implements ShakeService {
             List<Ingredient> sweeteners = all.stream()
                     .filter(Ingredient::getSweetener)
                     .collect(Collectors.toList());
-            if (user.getDiabetic()){
+            if (user.getDiabetic() != null && user.getDiabetic()){
                 sweeteners = sweeteners.stream().filter(it -> it.getType().equals(Type.SPICED)).collect(Collectors.toList());
             }
             Ingredient sweetener = sweeteners.get(random.nextInt(sweeteners.size()));

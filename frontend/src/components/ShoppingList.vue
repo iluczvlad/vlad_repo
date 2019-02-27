@@ -3,9 +3,13 @@
         <div v-if="user && (!user.shoppingList || user.shoppingList.length === 0)">
             Your Shopping List is empty.
         </div>
-        <IngredientTable v-if="user && user.shoppingList && user.shoppingList.length !==0"
-                         :show-delete-button="true"
-                         :shake-arr="user.shoppingList" @button-click="deleteIngredient"/>
+        <md-list>
+            <md-list-item v-for="sli in user.shoppingList" :key="sli.id">
+                {{sli.ingredients.reduce((acc,it) => acc + ', ' + it.name, '')}}
+                <md-button>delete</md-button>
+            </md-list-item>
+        </md-list>
+        <md-button>checkout</md-button>
     </div>
 </template>
 

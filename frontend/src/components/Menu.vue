@@ -37,6 +37,8 @@
 
 import {getIngredientsByType} from '@/api/ingredient'
 import IngredientTable from './IngredientTable.vue'
+import {addToShoppingList, getUserByEmail} from "@/api/user"
+import * as storage from '@/service/storage'
 
 export default {
     components: {
@@ -59,19 +61,34 @@ export default {
             spices: [],
         
         },
+        user: null,
     }),
     mounted() {
         getIngredientsByType('LIQUID').then((it) => this.ing.liquids=it)
         getIngredientsByType('SOLID').then((it) => this.ing.solids=it)
         getIngredientsByType('SPICE').then((it) => this.ing.spices=it)
+        getUserByEmail(storage.getEmail()).then(user => this.user=user)
     },
     methods: {
       setDone (id, index) {
         this[id] = true
         if (index) {
-          this.active = index
+            this.active = index
+        }
+        if (id === 'third') {
+            this.addToShoppingList()
         }
       },
+      addToShoppingList () {
+          const ids = [
+              ...this.selected.liquids,
+              ...this.selected.solids,
+              ...this.selected.spices,
+          ]
+          addToShoppingList(this.user.id, ids).then((ok) => {
+
+          })
+      }
     }
 }
 </script>

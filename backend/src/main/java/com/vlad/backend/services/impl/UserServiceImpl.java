@@ -1,9 +1,13 @@
 package com.vlad.backend.services.impl;
 
 import com.vlad.backend.dto.IngredientDTO;
+import com.vlad.backend.dto.ShoppingItemDTO;
 import com.vlad.backend.dto.UserDTO;
 import com.vlad.backend.model.Ingredient;
+import com.vlad.backend.model.ShoppingItem;
 import com.vlad.backend.model.User;
+import com.vlad.backend.repositories.IngredientRepository;
+import com.vlad.backend.repositories.ShoppingItemRepository;
 import com.vlad.backend.repositories.UserRepository;
 import com.vlad.backend.services.IngredientService;
 import com.vlad.backend.services.UserService;
@@ -21,12 +25,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     public final PasswordEncoder passwordEncoder;
     private final IngredientService ingredientService;
+    private final IngredientRepository ingredientRepository;
+    private final ShoppingItemRepository shoppingItemRepository;
 
     @Autowired
-    public UserServiceImpl(final UserRepository userRepository, PasswordEncoder passwordEncoder, IngredientService ingredientService) {
+    public UserServiceImpl(final UserRepository userRepository, PasswordEncoder passwordEncoder, IngredientService ingredientService, IngredientRepository ingredientRepository, ShoppingItemRepository shoppingItemRepository) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.ingredientService = ingredientService;
+        this.ingredientRepository = ingredientRepository;
+        this.shoppingItemRepository = shoppingItemRepository;
     }
 
     @Override
@@ -39,7 +47,7 @@ public class UserServiceImpl implements UserService {
             dto.setEmail(user.getEmail());
             dto.setName(user.getName());
             dto.setPassword(user.getPassword());
-            dto.setShoppingList(user.getShoppingList().stream().map(ingredientService::toDto).collect(Collectors.toSet()));
+            dto.setShoppingList(user.getShoppingList().stream().map(this::toShoppingItemDTO).collect(Collectors.toList()));
 
 //            return new UserDTO(User.getId(), User.getName());
             return dto;
@@ -61,7 +69,7 @@ public class UserServiceImpl implements UserService {
         dto.setDiabetic(user.getDiabetic());
         dto.setLactoseIntolerant((user.getLactoseIntolerant()));
         dto.setAllergies(user.getAllergies().stream().map(ingredientService::toDto).collect(Collectors.toList()));
-        dto.setShoppingList(user.getShoppingList().stream().map(ingredientService::toDto).collect(Collectors.toSet()));
+        dto.setShoppingList(user.getShoppingList().stream().map(this::toShoppingItemDTO).collect(Collectors.toList()));
         dto.setNoticed(user.getNoticed());
         return dto;
     }
@@ -90,10 +98,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void addToShoppingList(Long userId, List<IngredientDTO> shplst) {
         User user = userRepository.findById(userId).get();
-        user.getShoppingList().addAll(shplst
-                .stream()
-                .map(it -> new Ingredient(it.getId()))
-                .collect(Collectors.toSet()));
+        ShoppingItem item =new ShoppingItem();
+        item.setIngredients(shplst.stream()
+                .map(dto -> {
+                    Optional<Ingredient> byId = ingredientRepository.findById(dto.getId());
+                    return byId.get();
+                })
+                .collect(Collectors.toList()));
+        shoppingItemRepository.save(item);
+        user.getShoppingList().add(item);
+
         userRepository.save(user);
     }
 
@@ -115,5 +129,12 @@ public class UserServiceImpl implements UserService {
     public Boolean checkEmail(String email) {
         User user = userRepository.findByEmail(email);
         return user != null;
+    }
+
+    private ShoppingItemDTO toShoppingItemDTO(ShoppingItem item){
+        ShoppingItemDTO dto = new ShoppingItemDTO();
+        dto.setId(item.getId());
+        dto.setIngredients(item.getIngredients().stream().map(ingredientService::toDto).collect(Collectors.toList()));
+        return dto;
     }
 }

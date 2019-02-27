@@ -43,7 +43,7 @@ public class IngredientServiceImpl implements IngredientService {
         if (Type.SPICE.equals(type)) {
             List<Ingredient> spices = ingredientRepository.findByType(Type.SPICED);
             User user = userRepository.findByEmail(email);
-            if (!user.getDiabetic()) {
+            if (user.getDiabetic()==null || !user.getDiabetic()) {
                 spices.addAll(ingredientRepository.findByType(Type.SPICE));
             }
             return spices.stream().map(this::toDto).collect(Collectors.toList());
@@ -81,5 +81,12 @@ public class IngredientServiceImpl implements IngredientService {
         dto.setType(ingredient.getType());
         dto.setSweetener(ingredient.getSweetener());
         return dto;
+    }
+
+    @Override
+    public Ingredient toEntity(IngredientDTO dto) {
+        Ingredient i = new Ingredient();
+        i.setId(dto.getId());
+        return i;
     }
 }
