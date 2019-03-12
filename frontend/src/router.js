@@ -15,7 +15,7 @@ const router = new VueRouter({
     routes: [
         {
             path: '',
-            redirect: '/complex'
+            redirect: '/menu'
         },
         {
             path: '/simple',

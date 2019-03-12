@@ -114,7 +114,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteFromShoppingList(Long userId, Long id) {
         User user = userRepository.findById(userId).get();
-        user.getShoppingList().remove(new Ingredient(id));
+        user.getShoppingList().remove(new ShoppingItem(id));
         userRepository.save(user);
     }
 

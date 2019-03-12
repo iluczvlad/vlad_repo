@@ -25,7 +25,7 @@
                 
             </md-table-row>
         </md-table>
-        <div>
+        <div v-if="showKcal">
             Total kcal {{totalKcal}}
         </div>
     </div>
@@ -47,6 +47,10 @@ export default {
             type: Boolean,
             default: false,
         },
+        showKcal: {
+            type: Boolean,
+            default: true,
+        }
     },
     data(){
         return {
@@ -64,6 +68,9 @@ export default {
         },
         onButtonClick(ing, index){
             this.$emit("button-click", ing, index)
+        },
+        emptyCheckboxes() {
+            this.checkboxes= []
         }
     }
 

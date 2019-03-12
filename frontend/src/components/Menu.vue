@@ -3,9 +3,11 @@
         <md-steppers :md-active-step.sync="active" md-linear>
             <md-step id="first" class='step' md-label="Liquids" :md-done.sync="first">
                     <IngredientTable v-if="ing.liquids.length"
+                                ref="firstTable"
                                  class="ing-table" 
                                  :shake-arr="ing.liquids"
                                  :show-check-box="true"
+                                 :show-kcal="false"
                                  @change="selected.liquids=$event"/>
                 <md-button class="md-raised md-primary" :disabled="selected.liquids.length < 1" @click="setDone('first', 'second')">Continue</md-button>
                 
@@ -13,23 +15,34 @@
 
             <md-step id="second" class='step' md-label="Your Fruits" :md-done.sync="second">
                 <IngredientTable v-if="ing.solids.length"
+                                ref="secondTable"
                                  class="ing-table" 
                                  :shake-arr="ing.solids"
                                  :show-check-box="true"
+                                 :show-kcal="false"
                                  @change="selected.solids=$event"/>
                 <md-button class="md-raised md-primary" :disabled="selected.solids.length < 1"  @click="setDone('second', 'third')">Continue</md-button>
             </md-step>
 
             <md-step id="third" class='step' md-label="Your Sweeteners" :md-done.sync="third">
                 <IngredientTable v-if="ing.spices.length"
+                                ref="thirdTable"
                                  class="ing-table" 
                                  :shake-arr="ing.spices"
                                  :show-check-box="true"
+                                 :show-kcal="false"
                                  @change="selected.spices=$event"/>
                 <md-button class="md-raised md-primary" @click="setDone('third')">Add to Cart</md-button>
             </md-step>
 
         </md-steppers>
+
+        <md-badge v-if="user && user.shoppingList" class="md-primary cart-badge"
+                :md-content="user.shoppingList.length">
+            <md-button class="md-icon-button md-raised" @click="$router.push('/shplst')">
+                <md-icon>shopping_cart</md-icon>
+            </md-button>
+        </md-badge>
     </div>
 </template>
 
@@ -86,7 +99,20 @@ export default {
               ...this.selected.spices,
           ]
           addToShoppingList(this.user.id, ids).then((ok) => {
-
+                this.active='first'
+                this.first=false
+                this.second=false
+                this.third=false
+                this.selected={
+                    liquids: [],
+                    solids: [],
+                    spices: [],
+                
+                }
+            this.$refs.firstTable.emptyCheckboxes()
+            this.$refs.secondTable.emptyCheckboxes()
+            this.$refs.thirdTable.emptyCheckboxes()
+            getUserByEmail(storage.getEmail()).then(user => this.user=user)
           })
       }
     }
@@ -99,5 +125,10 @@ export default {
 }
 .step {
     width: 200px;
+}
+.cart-badge {
+    position: fixed;
+    top: 100px;
+    right: 20px;
 }
 </style>
