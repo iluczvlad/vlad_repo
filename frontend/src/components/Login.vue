@@ -38,12 +38,12 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import {
-required,
-email,
-minLength,
-} from 'vuelidate/lib/validators'
+  required,
+  email,
+  minLength,
+  } from 'vuelidate/lib/validators'
 import * as storage from '@/service/storage'
-import {loginUser} from '@/api/user'
+import {loginUser, getUserByEmail} from '@/api/user'
 export default {
     name: 'register',
     mixins: [validationMixin],
@@ -83,7 +83,11 @@ export default {
         loginUser(this.form.email, this.form.password).then((ok) => {
           if (ok) {
             storage.login(this.form.email, this.form.password)
-            this.$router.push('/')
+            getUserByEmail(this.form.email).then((user) => {
+              storage.login(this.form.email, this.form.password, user.role)
+              this.$router.push('/')
+            })
+            
           } else{
             // TODO display smth
             console.log('invalid credentials')

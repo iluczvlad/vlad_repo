@@ -1,5 +1,7 @@
 package com.vlad.backend.dto;
 
+import com.vlad.backend.model.Role;
+
 import java.util.List;
 import java.util.Set;
 
@@ -13,6 +15,15 @@ public class UserDTO {
     private List<IngredientDTO> allergies;
     private List<ShoppingItemDTO> shoppingList;
     private Boolean noticed;
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public UserDTO() {
     }

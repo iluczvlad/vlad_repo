@@ -1,5 +1,6 @@
 package com.vlad.backend;
 
+import com.vlad.backend.model.Role;
 import com.vlad.backend.model.User;
 import com.vlad.backend.repositories.UserRepository;
 import org.springframework.boot.SpringApplication;
@@ -16,11 +17,18 @@ public class BackendApplication {
 	}
 
 	private static void init(ConfigurableApplicationContext context){
+		checkUser(context, "admin@admin.admin", Role.ADMIN);
+		checkUser(context, "basic@admin.admin", Role.BASIC);
+		checkUser(context, "clerk@admin.admin", Role.CLERK);
+	}
+
+	private static void checkUser(ConfigurableApplicationContext context, String email, Role role) {
 		UserRepository userRepository = context.getBean(UserRepository.class);
-		User admin = userRepository.findByEmail("admin@admin.admin");
+		User admin = userRepository.findByEmail(email);
 		if (admin == null){
 			User user = new User();
-			user.setEmail("admin@admin.admin");
+			user.setEmail(email);
+			user.setRole(role);
 			PasswordEncoder passwordEncoder = context.getBean(PasswordEncoder.class);
 			user.setPassword(passwordEncoder.encode("admin"));
 			userRepository.save(user);

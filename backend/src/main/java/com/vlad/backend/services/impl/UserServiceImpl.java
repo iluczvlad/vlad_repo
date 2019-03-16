@@ -4,6 +4,7 @@ import com.vlad.backend.dto.IngredientDTO;
 import com.vlad.backend.dto.ShoppingItemDTO;
 import com.vlad.backend.dto.UserDTO;
 import com.vlad.backend.model.Ingredient;
+import com.vlad.backend.model.Role;
 import com.vlad.backend.model.ShoppingItem;
 import com.vlad.backend.model.User;
 import com.vlad.backend.repositories.IngredientRepository;
@@ -44,6 +45,7 @@ public class UserServiceImpl implements UserService {
             User user = byId.get();
             UserDTO dto = new UserDTO();
             dto.setId(user.getId());
+            dto.setRole(user.getRole());
             dto.setEmail(user.getEmail());
             dto.setName(user.getName());
             dto.setPassword(user.getPassword());
@@ -64,6 +66,7 @@ public class UserServiceImpl implements UserService {
         }
         UserDTO dto = new UserDTO();
         dto.setId(user.getId());
+        dto.setRole(user.getRole());
         dto.setEmail(user.getEmail());
         dto.setName(user.getName());
         dto.setDiabetic(user.getDiabetic());
@@ -77,6 +80,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(UserDTO dto) {
         User user = new User();
+        user.setRole(Role.BASIC);
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
@@ -88,6 +92,7 @@ public class UserServiceImpl implements UserService {
     public void savePreferences(UserDTO dto) {
         User user = userRepository.findById(dto.getId()).get();
         user.setId(dto.getId());
+        user.setRole(dto.getRole());
         user.setName(dto.getName());
         user.setAllergies(dto.getAllergies().stream().map(it -> new Ingredient(it.getId())).collect(Collectors.toList()));
         user.setDiabetic(dto.getDiabetic());

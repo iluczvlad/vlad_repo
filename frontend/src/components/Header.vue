@@ -23,14 +23,14 @@
 
             <md-list>
                 
-                <router-link to="/menu">
+                <router-link to="/menu" v-if="isBasic">
                     <md-list-item>
                         <md-icon>list</md-icon>
                         <span class="md-list-item-text">Menu</span>
                     </md-list-item>
                 </router-link>
 
-                <router-link to="/recipes">
+                <router-link to="/recipes" v-if="isBasic">
                     <md-list-item>
                         <md-icon>local_drink</md-icon>
                         <span class="md-list-item-text">Our Recipes</span>
@@ -44,28 +44,28 @@
                     </md-list-item>
                 </router-link> -->
 
-                <router-link to="/complex">
+                <router-link to="/complex" v-if="isBasic">
                     <md-list-item>
                         <md-icon>rotate_right</md-icon>
                         <span class="md-list-item-text">Randomiser</span>
                     </md-list-item>
                 </router-link>
 
-                <router-link to="/favs">
+                <router-link to="/favs" v-if="isBasic">
                     <md-list-item>
                         <md-icon>favorite</md-icon>
                         <span class="md-list-item-text">Favorites</span>
                     </md-list-item>
                 </router-link>
 
-                <router-link to="/prefs">
+                <router-link to="/prefs" v-if="isBasic">
                     <md-list-item>
                         <md-icon>person</md-icon>
                         <span class="md-list-item-text">Preferences</span>
                     </md-list-item>
                 </router-link>
 
-                <router-link to="/shplst">
+                <router-link to="/shplst" v-if="isBasic">
                     <md-list-item>
                         <md-icon>local_grocery_store</md-icon>
                         <span class="md-list-item-text">Cart</span>
@@ -100,6 +100,7 @@ export default {
             showNavigation: false,
             notificationActive: false,
             userId: null,
+            role: null,
         }
     },
     mounted(){
@@ -109,6 +110,7 @@ export default {
         logout() {
             storage.logout()
             this.userLoggedIn = false
+            this.role = null
             this.$router.push('/simple')
         },
         toggleNavigation() {
@@ -118,7 +120,10 @@ export default {
             if (this.userLoggedIn) {
                 getUserByEmail(storage.getEmail()).then(user => {
                     this.userId = user.id
-                    this.notificationActive = !user.noticed
+                    if (user.role === 'BASIC'){
+                        this.notificationActive = !user.noticed
+                    }
+                    this.role = user.role
                 })
             }
         },
@@ -129,9 +134,21 @@ export default {
             }).then(() => this.notificationActive = false)
         },
     },
+    computed: {
+        isAdmin() {
+            return this.role && this.role === "ADMIN"
+        },
+        isBasic() {
+            return this.role && this.role === "BASIC"
+        },
+        isClerk() {
+            return this.role && this.role === "CLERK"
+        }
+    },
     watch: {
         $route(route, oldRoute) {
             this.showNavigation = false
+            this.role = null
             this.userLoggedIn = storage.isLoggedIn()
             if (route.path === '/complex' && oldRoute.path === '/login')
                 this.checkNotification()
@@ -149,7 +166,10 @@ export default {
     align-items: center;
 }
 .menu-icon-size {
-    width: 104px;
+    width: fit-content;
+}
+.menu-icon-size > *{
+    width: 92px;
 }
 .md-drawer {
     width: 230px;

@@ -19,6 +19,15 @@ public class User {
     @ManyToMany
     private List<ShoppingItem> shoppingList;
     private Boolean noticed;
+    private Role role;
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public List<ShoppingItem> getShoppingList() {
         return shoppingList;
