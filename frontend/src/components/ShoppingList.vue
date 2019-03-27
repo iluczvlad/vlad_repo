@@ -17,9 +17,16 @@
                         <md-chip>
                             {{calculateCalories(sli) + ' kcal'}}
                         </md-chip>
+                        <md-chip>
+                            {{calculatePrice(sli) + ' RON'}}
+                        </md-chip>
                         <md-button class="md-icon-button md-raised md-accent delete-button"
                                             @click="deleteSLI(sli, index)">
                                     <md-icon>delete_forever</md-icon>
+                        </md-button>
+                        <md-button class="md-icon-button md-raised delete-button" style="background: green"
+                                            @click="addToFavs(sli)">
+                                    <md-icon style="color: white">save</md-icon>
                         </md-button>
                     </div>
                     
@@ -57,6 +64,10 @@
                 Your order has been sent!
             </md-dialog-content>
         </md-dialog> 
+        <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showFavSnackbar">
+            <span>Added to Favorites</span>
+            <md-button class="md-primary" @click="showFavSnackbar = false">Ok</md-button>
+        </md-snackbar>
     </div>
 </template>
 
@@ -65,6 +76,7 @@ import { validationMixin } from 'vuelidate'
 import IngredientTable from '@/components/IngredientTable.vue'
 import {getUserByEmail, deleteFromShoppingList} from '@/api/user'
 import * as storage from '@/service/storage'
+import {saveFavorite} from '@/api/favorite'
 import {
     required,
     numeric,
@@ -86,6 +98,7 @@ export default {
                 email: null,
             },
             orderWasPlaced: false,
+            showFavSnackbar: false,
         }
     },
     validations: {
@@ -123,6 +136,16 @@ export default {
         calculateCalories(sli) {
             return sli.ingredients.reduce((acc,it) => acc+it.kcal,0)
         },
+        calculatePrice(sli) {
+            const no = sli.ingredients.length
+            if (no >= 3 && no <= 5) {
+                return 10;
+            } else if (no >= 6 && no <= 8) {
+                return 14;
+            } else {
+                return 17;
+            } 
+        },
         validateData () {
             this.$v.$touch()
             if (!this.$v.$invalid) {
@@ -140,7 +163,17 @@ export default {
                     this.orderWasPlaced=true
                 })
             })
-        }
+        },
+        addToFavs(sli){
+            saveFavorite({
+                ingredients: sli.ingredients,
+                userEmail: storage.getEmail(),
+            }).then(ok=>{
+                if (ok){
+                    this.showFavSnackbar = true
+                }
+            })
+        },
     }
 
 }

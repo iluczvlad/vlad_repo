@@ -5,7 +5,9 @@ import 'vue-material/dist/vue-material.min.css'
 import 'vue-material/dist/theme/default.css'
 import VueRouter from 'vue-router'
 import router from '@/router.js'
+import VueCarousel from 'vue-carousel';
 
+Vue.use(VueCarousel);
 Vue.use(VueMaterial)
 Vue.use(VueRouter)
 

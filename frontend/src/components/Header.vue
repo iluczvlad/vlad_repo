@@ -8,7 +8,7 @@
         </div>
         
         <router-link class="home-logo" to="/">
-            <div></div>
+            <div><img alt="Vue logo" src="../assets/logo.png"></div>
         </router-link>
 
         <div class="log-buttons">
@@ -148,7 +148,7 @@ export default {
     watch: {
         $route(route, oldRoute) {
             this.showNavigation = false
-            this.role = null
+            this.role = storage.getRole()
             this.userLoggedIn = storage.isLoggedIn()
             if (route.path === '/complex' && oldRoute.path === '/login')
                 this.checkNotification()
@@ -176,9 +176,8 @@ export default {
     max-width: calc(100vw - 125px);
   }
 .home-logo{
-    width: 100px;
+    width: 200px;
     height: 90%;
-    background: grey;
     cursor: pointer;
 }
 </style>
