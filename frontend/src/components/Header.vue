@@ -2,7 +2,7 @@
     <div class="header">
         
         <div class="menu-icon-size">
-            <md-button class="md-icon-button" @click="toggleNavigation" v-if="userLoggedIn">
+            <md-button class="md-icon-button" @click="toggleNavigation" v-if="userLoggedIn && !isClerk">
                 <md-icon>menu</md-icon>
             </md-button>
         </div>
@@ -15,8 +15,8 @@
             <md-button class="md-raised md-accent" @click="logout" v-if="userLoggedIn">
                 Sign Out
             </md-button>
-            
-            <md-drawer v-if="userLoggedIn" :md-active.sync="showNavigation">
+        </div>
+        <md-drawer v-if="userLoggedIn" :md-active.sync="showNavigation">
             <md-toolbar class="md-transparent" md-elevation="0">
                 <span class="md-title">Menu</span>
             </md-toolbar>
@@ -85,7 +85,6 @@
                 </md-button>
             </router-link>
         </md-snackbar>
-        </div>
     </div>
 </template>
 
@@ -166,9 +165,6 @@ export default {
     align-items: center;
 }
 .menu-icon-size {
-    width: fit-content;
-}
-.menu-icon-size > *{
     width: 92px;
 }
 .md-drawer {

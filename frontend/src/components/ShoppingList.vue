@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="height: 100%; display: flex; justify-content: center; align-items: center;">
         <div v-if="user && (!user.shoppingList || user.shoppingList.length === 0)">
             Your Shopping List is empty.
         </div>
@@ -32,6 +32,9 @@
                     
                 </md-card-content>
             </md-card>
+            <md-chip style="margin-top: 10px;">
+                    {{'Total: ' + calculateRequestPrice(user.shoppingList) + ' RON'}}
+                </md-chip>
             <md-button v-if="user && user.shoppingList && user.shoppingList.length" @click="showDialog=true"
                 class="checkout-button md-raised">
                 checkout
@@ -135,6 +138,9 @@ export default {
         },
         calculateCalories(sli) {
             return sli.ingredients.reduce((acc,it) => acc+it.kcal,0)
+        },
+        calculateRequestPrice(sli) {
+            return sli.reduce((acc,it) => acc + this.calculatePrice(it), 0)
         },
         calculatePrice(sli) {
             const no = sli.ingredients.length

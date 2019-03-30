@@ -9,7 +9,7 @@
                                  :show-check-box="true"
                                  :show-kcal="false"
                                  @change="selected.liquids=$event"/>
-                <md-button class="md-raised md-primary" :disabled="selected.liquids.length < 1" @click="setDone('first', 'second')">Continue</md-button>
+                <md-button class="md-raised md-primary next-button" :disabled="selected.liquids.length < 1" @click="setDone('first', 'second')">Continue</md-button>
                 
             </md-step>
 
@@ -21,7 +21,7 @@
                                  :show-check-box="true"
                                  :show-kcal="false"
                                  @change="selected.solids=$event"/>
-                <md-button class="md-raised md-primary" :disabled="selected.solids.length < 1"  @click="setDone('second', 'third')">Continue</md-button>
+                <md-button class="md-raised md-primary next-button" :disabled="selected.solids.length < 1"  @click="setDone('second', 'third')">Continue</md-button>
             </md-step>
 
             <md-step id="third" class='step' md-label="Your Sweeteners" :md-done.sync="third">
@@ -32,7 +32,7 @@
                                  :show-check-box="true"
                                  :show-kcal="false"
                                  @change="selected.spices=$event"/>
-                <md-button class="md-raised md-primary" @click="setDone('third')">Add to Cart</md-button>
+                <md-button class="md-raised md-primary next-button" @click="setDone('third')">Add to Cart</md-button>
             </md-step>
 
         </md-steppers>
@@ -130,5 +130,8 @@ export default {
     position: fixed;
     top: 100px;
     right: 20px;
+}
+.next-button {
+    margin-left: 77.5%;
 }
 </style>

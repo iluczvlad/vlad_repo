@@ -31,3 +31,15 @@ export function placeOrder(dto){
     headers.append('Authorization', getAuth())
     return fetch(new Request(`/api/li/request/place`), init("POST", headers, JSON.stringify(dto))).then((response) => response.ok);
 }
+
+export function getAllRequests(){
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/request/all`), init("GET", headers)).then((response) => response.json());
+}
+
+export function confirmRequest(dto){
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/request/confirm`), init("POST", headers, JSON.stringify(dto))).then((response) => response.ok);
+}

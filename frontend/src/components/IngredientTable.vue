@@ -86,6 +86,7 @@ export default {
     width: 100%
 }
 .shake__table--75 {
+    width: 100%;
     max-height: 350px;
 }
 .table__name {

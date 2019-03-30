@@ -147,7 +147,6 @@ export default {
 
 <style scoped>
 .register {
-    width: 75%;
 
 }
 </style>

@@ -5,10 +5,16 @@
                 <md-card-header>
                     <div class="md-title">
                         <div>{{'#' + (index+1)}}</div>
-                        <md-button class="md-icon-button md-raised md-accent delete-button"
+                        <div>
+                            <md-button class="md-icon-button md-raised md-accent delete-button"
                                     @click="removeFavorite(fav, index)">
-                            <md-icon>delete_forever</md-icon>
-                        </md-button>
+                                <md-icon>delete_forever</md-icon>
+                            </md-button>
+                            <md-button class="md-icon-button md-raised delete-button" style="background: green"
+                                        @click="addToShoppingList(fav)">
+                                <md-icon style="color: white">local_grocery_store</md-icon>
+                            </md-button>
+                        </div>
                     </div>
                     
                 </md-card-header>
@@ -30,6 +36,7 @@
 import {listFavorites, deleteFavorite} from '@/api/favorite'
 import * as storage from '@/service/storage'
 import IngredientTable from './IngredientTable.vue'
+import {addToShoppingList, getUserByEmail} from "@/api/user"
 
 export default {
     name: 'Favorites',
@@ -39,10 +46,12 @@ export default {
     data(){
         return {
             favorites: [],
+            user: null,
         }
     },
     mounted(){
         listFavorites(storage.getEmail()).then(it => this.favorites=it)
+        getUserByEmail(storage.getEmail()).then(user => this.user=user)
     },
     methods:{
         removeFavorite(fav, index){
@@ -51,7 +60,12 @@ export default {
                     this.favorites.splice(index, 1)
                 }
             })
-        }
+        },
+        addToShoppingList(fav) {
+          addToShoppingList(this.user.id, fav.ingredients).then((ok) => {
+               
+          })
+      }
     }
 }
 </script>
