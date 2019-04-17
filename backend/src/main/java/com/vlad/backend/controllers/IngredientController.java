@@ -39,4 +39,9 @@ public class IngredientController {
         return new ResponseEntity<>(ingredientService.findAll(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/li/ingredient/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable Long id){
+        ingredientService.delete(id);
+    }
+
 }

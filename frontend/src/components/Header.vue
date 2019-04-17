@@ -71,6 +71,30 @@
                         <span class="md-list-item-text">Cart</span>
                     </md-list-item>
                 </router-link>
+
+                <router-link to="/admin/home" v-if="isAdmin">
+                    <md-list-item>
+                        <span class="md-list-item-text">Home</span>
+                    </md-list-item>
+                </router-link>
+
+                <router-link to="/admin/users" v-if="isAdmin">
+                    <md-list-item>
+                        <span class="md-list-item-text">Users Management</span>
+                    </md-list-item>
+                </router-link>
+
+                <router-link to="/admin/premade" v-if="isAdmin">
+                    <md-list-item>
+                        <span class="md-list-item-text">Recipes Management</span>
+                    </md-list-item>
+                </router-link>
+
+                <router-link to="/admin/ingr" v-if="isAdmin">
+                    <md-list-item>
+                        <span class="md-list-item-text">Ingredients Management</span>
+                    </md-list-item>
+                </router-link>
             </md-list>
         </md-drawer>
 

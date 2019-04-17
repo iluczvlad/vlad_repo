@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,12 +24,14 @@ public class RequestServiceImpl implements RequestService {
     private final RequestRepository requestRepository;
     private final UserRepository userRepository;
     private final IngredientService ingredientService;
+    private final GmailClientImpl gmailClient;
 
     @Autowired
-    public RequestServiceImpl(RequestRepository requestRepository, UserRepository userRepository, IngredientService ingredientService) {
+    public RequestServiceImpl(RequestRepository requestRepository, UserRepository userRepository, IngredientService ingredientService, GmailClientImpl gmailClient) {
         this.requestRepository = requestRepository;
         this.userRepository = userRepository;
         this.ingredientService = ingredientService;
+        this.gmailClient = gmailClient;
     }
 
     @Override
@@ -75,6 +76,7 @@ public class RequestServiceImpl implements RequestService {
         request.setConfirmationDate(new Date());
         request.setClerk(userRepository.findById(dto.getClerkId()).get());
         requestRepository.save(request);
+        gmailClient.sendMail(request);
     }
 
     private ShoppingItemDTO toShoppingItemDTO(ShoppingItem item){
