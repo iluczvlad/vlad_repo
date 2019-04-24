@@ -16,4 +16,9 @@ public interface UserService {
     void deleteFromShoppingList(Long userId, Long id);
     void saveNotified(UserDTO dto);
     Boolean checkEmail(String email);
+    List<UserDTO> findAll();
+
+    void update(UserDTO dto);
+
+    void delete(Long id);
 }

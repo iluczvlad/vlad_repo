@@ -47,6 +47,12 @@ export function getUserByEmail(email){
     return fetch(new Request(`/api/li/user`), init("POST", headers, email)).then((response) => response.json());
 }
 
+export function getAllUsers(){
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/user/all`), init("GET", headers)).then((response) => response.json());
+}
+
 export function checkEmail(email){
     const headers = initHeaders()
     return fetch(new Request(`/api/nl/user/check-email`), init("POST", headers, email)).then((response) => response.text());
@@ -56,6 +62,18 @@ export function saveUserPreferences(dto){
     const headers = initHeaders()
     headers.append('Authorization', getAuth())
     return fetch(new Request(`/api/li/user/prefs`), init("POST", headers, JSON.stringify(dto))).then((response) => response.ok);
+}
+
+export function updateUser(dto){
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/user`), init("PUT", headers, JSON.stringify(dto))).then((response) => response.ok);
+}
+
+export function deleteUser(id){
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/user/${id}`), init("DELETE", headers)).then((response) => response.ok);
 }
 
 export function addToShoppingList(userId, lst){

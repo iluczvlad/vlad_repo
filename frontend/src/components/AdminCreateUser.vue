@@ -36,12 +36,18 @@
                 <span class="md-error" v-if="!$v.form.password1.required">The password is required</span>
                 <span class="md-error" v-else-if="!$v.form.password1.sameAsPassword">The two passwords do not match</span>
             </md-field>
+            <md-field class="role">
+                <md-select v-model="form.role">
+                    <md-option value="ADMIN">Admin</md-option>
+                    <md-option value="CLERK">Clerk</md-option>
+                </md-select>
+            </md-field>
             </md-card-content>
 
             <md-progress-bar md-mode="indeterminate" v-if="sending" />
 
             <md-card-actions>
-            <md-button type="submit" class="md-primary md-raised" :disabled="sending">Register</md-button>
+            <md-button type="submit" class="md-primary md-raised" :disabled="sending">Create</md-button>
             </md-card-actions>
         </md-card>
 
@@ -70,7 +76,7 @@ export default {
         password: null,
         password1: null,
         email: null,
-        role: 0,
+        role: 'CLERK',
       },
       userSaved: false,
       sending: false,
@@ -125,15 +131,13 @@ export default {
             name: this.form.name,
             password: this.form.password,
             email: this.form.email,
+            role: this.form.role,
         })
         registerUser(user).then(() => {
             this.lastUser = `${this.form.name}`
             this.userSaved = true
             this.sending = false
             this.clearForm()
-            setTimeout(()=>{
-              this.$router.push('/login')
-            },1500)
         })
       },
       validateUser () {

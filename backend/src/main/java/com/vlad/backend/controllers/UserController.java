@@ -24,6 +24,21 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/li/user/all", method = RequestMethod.GET)
+    public ResponseEntity<List<UserDTO>> findAll(){
+        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/li/user", method = RequestMethod.PUT)
+    public void update(@RequestBody UserDTO dto){
+        userService.update(dto);
+    }
+
+    @RequestMapping(value = "/li/user/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable Long id){
+        userService.delete(id);
+    }
+
     @RequestMapping(value = "/li/user", method = RequestMethod.POST)
     public ResponseEntity<UserDTO> getByEmail(@RequestBody String email) {
         return new ResponseEntity<>(userService.getByEmail(email), HttpStatus.OK);

@@ -78,6 +78,12 @@
                     </md-list-item>
                 </router-link>
 
+                <router-link to="/admin/users/create" v-if="isAdmin">
+                    <md-list-item>
+                        <span class="md-list-item-text">Users Creation</span>
+                    </md-list-item>
+                </router-link>
+
                 <router-link to="/admin/users" v-if="isAdmin">
                     <md-list-item>
                         <span class="md-list-item-text">Users Management</span>

@@ -15,6 +15,7 @@ import AdminHome from '@/components/AdminHome.vue'
 import AdminIngredients from '@/components/AdminIngredients.vue'
 import AdminPremade from '@/components/AdminPremade.vue'
 import AdminUser from '@/components/AdminUser.vue'
+import AdminCreateUser from '@/components/AdminCreateUser.vue'
 
 const router = new VueRouter({
     routes: [
@@ -112,6 +113,15 @@ const router = new VueRouter({
         {
             path: '/admin/home',
             component: AdminHome,
+            beforeEnter: (to,from,next) => {
+                if (storage.isAdmin()){
+                    next()
+                }
+            }
+        },
+        {
+            path: '/admin/users/create',
+            component: AdminCreateUser,
             beforeEnter: (to,from,next) => {
                 if (storage.isAdmin()){
                     next()

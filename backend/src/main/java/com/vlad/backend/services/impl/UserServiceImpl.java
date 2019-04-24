@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(UserDTO dto) {
         User user = new User();
-        user.setRole(Role.BASIC);
+        user.setRole(dto.getRole());
         user.setName(dto.getName());
         user.setEmail(dto.getEmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
@@ -141,5 +141,32 @@ public class UserServiceImpl implements UserService {
         dto.setId(item.getId());
         dto.setIngredients(item.getIngredients().stream().map(ingredientService::toDto).collect(Collectors.toList()));
         return dto;
+    }
+
+    @Override
+    public List<UserDTO> findAll() {
+        return userRepository.findAll().stream()
+                .map(user -> {
+                    UserDTO dto = new UserDTO();
+                    dto.setId(user.getId());
+                    dto.setRole(user.getRole());
+                    dto.setEmail(user.getEmail());
+                    dto.setName(user.getName());
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public void update(UserDTO dto) {
+        User user = userRepository.findById(dto.getId()).get();
+        user.setRole(dto.getRole());
+        user.setName(dto.getName());
+        userRepository.save(user);
+    }
+
+    @Override
+    public void delete(Long id) {
+        userRepository.deleteById(id);
     }
 }
