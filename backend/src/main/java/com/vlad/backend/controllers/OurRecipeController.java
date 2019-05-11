@@ -25,13 +25,13 @@ public class OurRecipeController {
     }
 
     @RequestMapping(value = "/li/or", method = RequestMethod.POST)
-    public ResponseEntity save(@RequestBody List<Long> ingIds) {
-        ourRecipeService.save(ingIds);
+    public ResponseEntity save(@RequestBody OurRecipeDTO dto) {
+        ourRecipeService.save(dto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @RequestMapping(value = "/li/or/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity delete(@RequestBody Long id) {
+    public ResponseEntity delete(@PathVariable Long id) {
         ourRecipeService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

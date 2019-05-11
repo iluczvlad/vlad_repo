@@ -7,7 +7,7 @@
             </md-button>
         </div>
         
-        <router-link class="home-logo" to="/">
+        <router-link class="home-logo" to="/" v-if="$route.path !== '/simple'">
             <div><img alt="Vue logo" src="../assets/logo.png"></div>
         </router-link>
 
@@ -69,12 +69,6 @@
                     <md-list-item>
                         <md-icon>local_grocery_store</md-icon>
                         <span class="md-list-item-text">Cart</span>
-                    </md-list-item>
-                </router-link>
-
-                <router-link to="/admin/home" v-if="isAdmin">
-                    <md-list-item>
-                        <span class="md-list-item-text">Home</span>
                     </md-list-item>
                 </router-link>
 
@@ -205,5 +199,8 @@ export default {
     width: 200px;
     height: 90%;
     cursor: pointer;
+}
+.log-buttons {
+    width: 92px;
 }
 </style>

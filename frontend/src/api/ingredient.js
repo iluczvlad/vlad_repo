@@ -30,6 +30,18 @@ export function getIngredient(id) {
     return fetch(new Request(`/api/li/ingredient/${id}`), myInit).then((response) => response.json());
 }
 
+export function deleteIngredient(id) {
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/ingredient/${id}`), init('DELETE', headers)).then((response) => response.ok);
+}
+
+export function saveIngredient(dto) {
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/ingredient`), init('POST', headers, JSON.stringify(dto))).then((response) => response.ok);
+}
+
 export function getIngredientsByType(type) {
     const headers = initHeaders()
     headers.append('Authorization', getAuth())

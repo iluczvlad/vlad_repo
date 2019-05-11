@@ -3,7 +3,8 @@
         <!-- <md-button class="md-raised" @click="makeSimpleShake">Make a Shake</md-button>
         <IngredientTable v-if="simpleShake" :shake-arr="simpleShakeArr"/> -->
         <div class="central-logo">
-            <carousel :autoplay="true" :perPage="1" :loop="true" :paginationEnabled="false">
+            <img alt="Vue logo" src="../assets/logo.png">
+            <!-- <carousel :autoplay="true" :perPage="1" :loop="true" :paginationEnabled="false">
                 <slide>
                     <img class="carousel-img" alt="1" src="../assets/sl1.jpg">
                 </slide>
@@ -13,7 +14,7 @@
                 <slide>
                     <img class="carousel-img" alt="3" src="../assets/sl3.jpg">
                 </slide>
-            </carousel>
+            </carousel> -->
         </div>
         <div class="buttons-home">
             <md-button class="md-raised md-primary" @click="$router.push('login')" v-if="!userLoggedIn">
@@ -70,9 +71,7 @@ export default {
     height: 100%;
 }
 .central-logo {
-    width: 85%;
-    height: 275px;
-    margin-top: 30px;
+    margin-top: 130px;
     margin-bottom: 50px;
 }
 .contact-link {

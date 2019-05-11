@@ -31,15 +31,18 @@ public class OurRecipeServiceImpl implements OurRecipeService {
         return ourRecipeRepository.findAll().stream().map(it -> {
             OurRecipeDTO dto = new OurRecipeDTO();
             dto.setId(it.getId());
+            dto.setName(it.getName());
             dto.setIngredients(it.getIngredients().stream().map(ingredientService::toDto).collect(Collectors.toList()));
             return dto;
         }).collect(Collectors.toList());
     }
 
     @Override
-    public void save(List<Long> ingIds) {
+    public void save(OurRecipeDTO dto) {
         OurRecipe recipe = new OurRecipe();
-        recipe.setIngredients(ingIds.stream().map(id -> ingredientRepository.findById(id).get()).collect(Collectors.toList()));
+        recipe.setId(dto.getId());
+        recipe.setName(dto.getName());
+        recipe.setIngredients(dto.getIngredients().stream().map(i -> ingredientRepository.findById(i.getId()).get()).collect(Collectors.toList()));
         ourRecipeRepository.save(recipe);
     }
 

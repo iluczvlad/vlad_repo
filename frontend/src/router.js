@@ -27,7 +27,7 @@ const router = new VueRouter({
                 } else if (storage.isClerk()) {
                     next('/clerk')
                 } else if (storage.isAdmin()) {
-                    next('/admin/home')
+                    next('/admin/premade')
                 }
             }
         },
@@ -111,8 +111,8 @@ const router = new VueRouter({
             }
         },
         {
-            path: '/admin/home',
-            component: AdminHome,
+            path: '/admin/premade',
+            component: AdminPremade,
             beforeEnter: (to,from,next) => {
                 if (storage.isAdmin()){
                     next()
@@ -131,15 +131,6 @@ const router = new VueRouter({
         {
             path: '/admin/users',
             component: AdminUser,
-            beforeEnter: (to,from,next) => {
-                if (storage.isAdmin()){
-                    next()
-                }
-            }
-        },
-        {
-            path: '/admin/premade',
-            component: AdminPremade,
             beforeEnter: (to,from,next) => {
                 if (storage.isAdmin()){
                     next()

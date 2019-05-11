@@ -68,6 +68,22 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
+    public void save(IngredientDTO dto) {
+        Ingredient i = new Ingredient();
+        i.setId(dto.getId());
+        i.setDetox((dto.getDetox()));
+        i.setHasLactose(dto.getHasLactose());
+        i.setKcal(dto.getKcal());
+        i.setName(dto.getName());
+        i.setPortion(dto.getPortion());
+        i.setSweetener(dto.getSweetener());
+        i.setTemp(dto.getTemp());
+        i.setVegan(dto.getVegan());
+        i.setType(dto.getType());
+        ingredientRepository.save(i);
+    }
+
+    @Override
     public IngredientDTO toDto(Ingredient ingredient) {
         IngredientDTO dto = new IngredientDTO();
         dto.setId(ingredient.getId());

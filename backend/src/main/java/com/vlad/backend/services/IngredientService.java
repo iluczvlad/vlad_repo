@@ -14,4 +14,6 @@ public interface IngredientService {
     List<IngredientDTO> findAll();
     IngredientDTO toDto(Ingredient ingredient);
     Ingredient toEntity(IngredientDTO dto);
+
+    void save(IngredientDTO dto);
 }

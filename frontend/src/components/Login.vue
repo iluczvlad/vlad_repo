@@ -1,7 +1,7 @@
 <template>
     <div class="register">
-        <form novalidate class="md-layout" @submit.prevent="validateUser">
-        <md-card class="md-layout-item md-size-50 md-small-size-100">
+        <form novalidate class="md-layout" @submit.prevent="validateUser" style="width: 600px;">
+        <md-card class="md-layout-item">
             <md-card-header>
             <div class="md-title">Login</div>
             </md-card-header>
@@ -9,7 +9,7 @@
             <md-card-content>
                 
             <div class="md-layout md-gutter">
-                <div class="md-layout-item md-small-size-100">
+                <div class="md-layout-item">
                 <md-field :class="getValidationClass('email')">
                     <label for="email">Email</label>
                     <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" />
@@ -18,7 +18,7 @@
                 </md-field>
                 <md-field :class="getValidationClass('password')">
                     <label for="password">Password</label>
-                    <md-input name="password" id="password" autocomplete="family-name" v-model="form.password" />
+                    <md-input type="password" name="password" id="password" autocomplete="family-name" v-model="form.password" />
                     <span class="md-error" v-if="!$v.form.password.required">The password is required</span>
                     <span class="md-error" v-else-if="!$v.form.password.minlength">Invalid password</span>
                 </md-field>
@@ -106,6 +106,8 @@ export default {
 
 <style scoped>
 .register {
-
+  display: flex;
+  justify-content: center;
+  padding-top: 20vh;
 }
 </style>

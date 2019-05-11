@@ -4,6 +4,7 @@ import java.util.List;
 
 public class OurRecipeDTO {
     private Long id;
+    private String name;
     private List<IngredientDTO> ingredients;
 
     public Long getId() {
@@ -12,6 +13,14 @@ public class OurRecipeDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<IngredientDTO> getIngredients() {

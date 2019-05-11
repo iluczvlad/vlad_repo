@@ -1,10 +1,11 @@
 <template>
     <div class="md-layout transparent-layout">
+        <div class="md-layout">
         <md-card class="md-layout-item fav-card" v-for="(fav, index) of favorites" :key="fav.id" md-with-hover>
             <md-ripple>
                 <md-card-header>
                     <div class="md-title">
-                        <div>{{'#' + (index+1)}}</div>
+                        <div>{{fav.name}}</div>
                         <div>
                             <md-button class="md-icon-button md-raised delete-button" style="background: green"
                                         @click="addToShoppingList(fav)">
@@ -25,6 +26,11 @@
                 </md-card-actions> -->
             </md-ripple>
         </md-card>
+        </div>
+        <md-snackbar md-position="center" :md-duration="2000" :md-active.sync="showFavSnackbar">
+            <span>Added to Basket</span>
+            <md-button class="md-primary" @click="showFavSnackbar = false">Ok</md-button>
+        </md-snackbar>
     </div>
 </template>
 
@@ -41,6 +47,7 @@ export default {
     },
     data(){
         return {
+            showFavSnackbar: false,
             favorites: [],
             user: null,
         }
@@ -52,7 +59,7 @@ export default {
     methods:{
         addToShoppingList(fav) {
           addToShoppingList(this.user.id, fav.ingredients).then((ok) => {
-               
+               this.showFavSnackbar = true
           })
       }
     }

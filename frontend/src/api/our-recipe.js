@@ -31,11 +31,17 @@ export function saveOurRecipe(dto) {
     const headers = initHeaders()
     const body = JSON.stringify(dto)
     headers.append('Authorization', getAuth())
-    return fetch(new Request(`/api/li/fav`), init("POST", headers, body)).then((response) => response.ok);
+    return fetch(new Request(`/api/li/or`), init("POST", headers, body)).then((response) => response.ok);
 }
 
-export function listOurRecipe(email) {
+export function listOurRecipe() {
     const headers = initHeaders()
     headers.append('Authorization', getAuth())
     return fetch(new Request(`/api/li/or/list`), init("GET", headers)).then((response) => response.json());
+}
+
+export function deleteOurRecipe(id) {
+    const headers = initHeaders()
+    headers.append('Authorization', getAuth())
+    return fetch(new Request(`/api/li/or/${id}`), init("DELETE", headers)).then((response) => response.ok);
 }

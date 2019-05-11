@@ -4,6 +4,7 @@
             <md-card-header>
                 <div class="md-title"> {{request.basic.name}}</div>
                 <div class="md-subhead">{{new Date(request.placementDate).toLocaleString('en-GB')}}</div>
+                <div class="md-subhead">{{request.address}}</div>
                 </md-card-header>
             <div v-if="request.basic && request.basic.shoppingList && request.basic.shoppingList.length"  
                 class="shplst-container">

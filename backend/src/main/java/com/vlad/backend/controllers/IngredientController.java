@@ -6,10 +6,7 @@ import com.vlad.backend.services.IngredientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,6 +29,11 @@ public class IngredientController {
     @RequestMapping(value = "/li/ingredient/type/{type}/{email}", method = RequestMethod.GET)
     public ResponseEntity<List<IngredientDTO>> get(@PathVariable Type type, @PathVariable String email) {
         return new ResponseEntity<>(ingredientService.get(type, email), HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/li/ingredient", method = RequestMethod.POST)
+    public void save(@RequestBody IngredientDTO dto) {
+        ingredientService.save(dto);
     }
 
     @RequestMapping("/li/ingredient/list")
